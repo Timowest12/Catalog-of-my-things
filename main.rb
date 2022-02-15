@@ -1,3 +1,5 @@
+require_relative './utils/lists'
+
 class App
   def run
     puts 'Welcome!'
@@ -31,19 +33,23 @@ class App
   def get_num(option)
     case option
     when '1'
-      list_all_books
+      Listing.list('Books')
     when '2'
-      list_all_people
+      Listing.list('MusicAlbum')
     when '3'
-      create_person
+      Listing.list('Movies')
     when '4'
-      create_book
+      Listing.list('Games')
     when '5'
-      create_rental
+      Listing.list('Genres')
     when '6'
-      list_rentals_by_person_id
+      Listing.list('Labels')
+    when '7'
+      Listing.list('Authors')
+    when '8'
+      Listing.list('Sources')
     else
-      puts 'enter a number between 1 and 7'
+      puts 'Enter a number between 1 and 13'
     end
   end
 

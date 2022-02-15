@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # require_relative '../classes/'
 
 class Listing
@@ -36,7 +38,7 @@ class BookListing < Listing
   end
 end
 
- class MusicAlbumListing < Listing
+class MusicAlbumListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE MUSIC ALBUMS \n\n\n"
@@ -44,7 +46,7 @@ end
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end
- end
+end
 
 class MoviesListing < Listing
   def self.list
@@ -104,5 +106,4 @@ class SourcesListing < Listing
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end
-end
 end

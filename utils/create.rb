@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # require_relative '../classes/'
 
 class Creator
@@ -21,8 +23,7 @@ class BookCreator
   def self.create
     puts `clear`
     puts "\n\n\n\t\t  BOOK CREATION \n\n"
-   
-    
+
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "
     gets.chomp
@@ -60,5 +61,4 @@ class GameCreator
     print "\t\t  "
     gets.chomp
   end
-end
 end

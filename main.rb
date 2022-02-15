@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './utils/lists'
 require_relative './utils/create'
 
@@ -5,12 +7,14 @@ class App
   def run
     puts 'Welcome!'
     loop do
+      puts `clear`
       menu
       option = gets.chomp.to_i
       break if option == 13
+
       get_num option
     end
-    puts 'Thank you for using our Library!'
+    puts 'Thank you using our Library!'
   end
 
   def menu
@@ -60,9 +64,7 @@ class App
       puts 'Enter a number between 1 and 13'
     end
   end
-
 end
-
 
 def main
   app = App.new

@@ -38,7 +38,13 @@ class MusicAlbumCreator
   def self.create
     puts `clear`
     puts "\n\n\n\t\t  MUSIC ALBUM CREATION \n\n"
-    # Code goes here
+    print 'type the name of the album:'
+    name = gets.chomp
+
+    print 'type date in format(yyyy-mm-dd)'
+    publish_date = gets.chomp
+
+    puts 'album created succesfully'
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "
     gets.chomp

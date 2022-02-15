@@ -1,13 +1,13 @@
 require_relative './utils/lists'
+require_relative './utils/create'
 
 class App
   def run
     puts 'Welcome!'
     loop do
       menu
-      option = gets.chomp
-      break if option == '13'
-
+      option = gets.chomp.to_i
+      break if option == 13
       get_num option
     end
     puts 'Thank you for using our Library!'
@@ -32,44 +32,41 @@ class App
 
   def get_num(option)
     case option
-    when '1'
+    when 1
       Listing.list('Books')
-    when '2'
+    when 2
       Listing.list('MusicAlbum')
-    when '3'
+    when 3
       Listing.list('Movies')
-    when '4'
+    when 4
       Listing.list('Games')
-    when '5'
+    when 5
       Listing.list('Genres')
-    when '6'
+    when 6
       Listing.list('Labels')
-    when '7'
+    when 7
       Listing.list('Authors')
-    when '8'
+    when 8
       Listing.list('Sources')
+    when 9
+      Creator.create('Book')
+    when 10
+      Creator.create('MusicAlbum')
+    when 11
+      Creator.create('Movie')
+    when 12
+      Creator.create('Game')
     else
       puts 'Enter a number between 1 and 13'
     end
   end
 
-  def create_person
-    print 'Do you want to create a student (1) or teacher (2) [Input a number]: '
-    option = gets.chomp
+end
 
-    case option
-    when '1'
-      create_student
-    when '2'
-      create_teacher
-    else
-      puts 'Invalid input. Kindly type 1 or 2'
-    end
-  end
 
 def main
   app = App.new
   app.run
 end
+
 main
-end

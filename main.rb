@@ -1,8 +1,10 @@
+# rubocop: disable Metrics
 # frozen_string_literal: true
 
 require_relative './utils/lists'
 require_relative './utils/create'
 
+# App class
 class App
   def run
     puts 'Welcome!'
@@ -72,3 +74,4 @@ def main
 end
 
 main
+# rubocop: enable Metrics

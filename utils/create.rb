@@ -1,7 +1,9 @@
+# rubocop: disable Metrics
 # frozen_string_literal: true
 
 # require_relative '../classes/'
 
+# creator class
 class Creator
   def self.create(option)
     case option
@@ -19,6 +21,7 @@ class Creator
   end
 end
 
+# book creator class
 class BookCreator
   def self.create
     puts `clear`
@@ -30,6 +33,7 @@ class BookCreator
   end
 end
 
+# music album creator class
 class MusicAlbumCreator
   def self.create
     puts `clear`
@@ -41,6 +45,7 @@ class MusicAlbumCreator
   end
 end
 
+# moviecreator class
 class MovieCreator
   def self.create
     puts `clear`
@@ -52,6 +57,7 @@ class MovieCreator
   end
 end
 
+# game creator class
 class GameCreator
   def self.create
     puts `clear`
@@ -62,3 +68,4 @@ class GameCreator
     gets.chomp
   end
 end
+# rubocop: enable Metrics

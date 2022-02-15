@@ -1,7 +1,9 @@
+# rubocop: disable Metrics
 # frozen_string_literal: true
 
 # require_relative '../classes/'
 
+# class listing
 class Listing
   def self.list(option)
     case option
@@ -27,6 +29,7 @@ class Listing
   end
 end
 
+# booklisting class
 class BookListing < Listing
   def self.list
     puts `clear`
@@ -38,6 +41,7 @@ class BookListing < Listing
   end
 end
 
+# music album listing class
 class MusicAlbumListing < Listing
   def self.list
     puts `clear`
@@ -48,6 +52,7 @@ class MusicAlbumListing < Listing
   end
 end
 
+# movielisting class
 class MoviesListing < Listing
   def self.list
     puts `clear`
@@ -58,6 +63,7 @@ class MoviesListing < Listing
   end
 end
 
+# games listing class
 class GamesListing < Listing
   def self.list
     puts `clear`
@@ -68,6 +74,7 @@ class GamesListing < Listing
   end
 end
 
+# genre listing class
 class GenresListing < Listing
   def self.list
     puts `clear`
@@ -78,6 +85,7 @@ class GenresListing < Listing
   end
 end
 
+# label listing class
 class LabelsListing < Listing
   def self.list
     puts `clear`
@@ -88,6 +96,7 @@ class LabelsListing < Listing
   end
 end
 
+# author listing class
 class AuthorsListing < Listing
   def self.list
     puts `clear`
@@ -98,6 +107,7 @@ class AuthorsListing < Listing
   end
 end
 
+# sourcelisting class
 class SourcesListing < Listing
   def self.list
     puts `clear`
@@ -107,3 +117,4 @@ class SourcesListing < Listing
     gets.chomp
   end
 end
+# rubocop: enable Metrics

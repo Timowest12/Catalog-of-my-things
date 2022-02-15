@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+# Item class
 class Item
   attr_accessor :publish_date, :archived
   attr_reader :id
   attr_writer :label, :author, :genre, :source
 
-  def initialize(publish_date, archived = false)
+  def initialize(publish_date, archived: false)
     @id = rand(1..10_000)
     @publish_date = publish_date
     @archived = archived
@@ -19,19 +20,19 @@ class Item
     @archived = true if can_be_archived?
   end
 
-  def set_label(label)
+  def label(label)
     @label = label
   end
 
-  def set_author(author)
+  def author(author)
     @author = author
   end
 
-  def set_genre(genre)
+  def get_genre(genre)
     @genre = genre
   end
 
-  def set_source(source)
+  def source(source)
     @source = source
   end
 end

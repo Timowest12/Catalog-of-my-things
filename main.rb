@@ -3,9 +3,17 @@
 
 require_relative './utils/lists'
 require_relative './utils/create'
+require_relative './utils/data_storage'
 
 # App class
 class App
+  include DataStorage
+  @@games = []
+
+  def initialize
+    @games = load_games
+  end
+
   def run
     puts 'Welcome!'
     loop do
@@ -14,9 +22,10 @@ class App
       option = gets.chomp.to_i
       break if option == 13
 
-      get_num option
+      get_num(option)
     end
     puts 'Thank you using our Library!'
+    save_games
   end
 
   def menu

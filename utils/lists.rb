@@ -68,7 +68,11 @@ class GamesListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE GAMES \n\n\n"
-    # Code goes here
+    games = App.class_variable_get(:@@games)
+    games.each do |game|
+      puts "Multiplayer: #{game.multiplayer}, Last Played At: #{game.last_played_at},
+      Publish Date: #{game.publish_date}"
+    end
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end

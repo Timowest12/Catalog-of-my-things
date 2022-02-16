@@ -28,7 +28,7 @@ class Item
     @author = author
   end
 
-  def get_genre(genre)
+  def genre(genre)
     @genre = genre
   end
 

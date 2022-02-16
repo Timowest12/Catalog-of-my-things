@@ -6,6 +6,8 @@ require_relative './utils/create'
 
 # App class
 class App
+  @@games = []
+
   def run
     puts 'Welcome!'
     loop do
@@ -14,7 +16,7 @@ class App
       option = gets.chomp.to_i
       break if option == 13
 
-      get_num option
+      get_num(option)
     end
     puts 'Thank you using our Library!'
   end

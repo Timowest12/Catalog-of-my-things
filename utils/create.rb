@@ -1,7 +1,6 @@
 # rubocop: disable Metrics
 # frozen_string_literal: true
 require_relative '../classes/musicAlbum'
-require './utils/musicController'
 # require_relative '../classes/'
 
 # creator class
@@ -39,7 +38,6 @@ end
 
 # music album creator class
 class MusicAlbumCreator
-  include MusicAlbumModule
   def initialize
 
     @albums = []

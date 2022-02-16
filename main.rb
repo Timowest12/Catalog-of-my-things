@@ -10,10 +10,12 @@ class App
   include DataStorage
   @@albums = []
   @@games = []
+  @@authors = []
 
   def initialize
     @games = load_games
     @albums = load_albums
+    @authors = load_authors
   end
 
   def run
@@ -29,6 +31,7 @@ class App
     puts 'Thank you using our Library!'
     save_games
     save_albums
+    save_author
   end
 
   def menu

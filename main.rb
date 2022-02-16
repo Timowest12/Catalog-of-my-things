@@ -8,10 +8,12 @@ require_relative './utils/data_storage'
 # App class
 class App
   include DataStorage
+  @@albums = []
   @@games = []
 
   def initialize
     @games = load_games
+    @albums = load_albums
   end
 
   def run
@@ -26,6 +28,7 @@ class App
     end
     puts 'Thank you using our Library!'
     save_games
+    save_albums
   end
 
   def menu

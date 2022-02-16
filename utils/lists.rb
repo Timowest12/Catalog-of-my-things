@@ -46,7 +46,11 @@ class MusicAlbumListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE MUSIC ALBUMS \n\n\n"
-    # Code goes here
+    albums = App.class_variable_get(:@@albums)
+    albums.each do |album|
+      puts "name: #{album.name}, genre: #{album.genre},
+      Publish Date: #{album.publish_date}, on spotify: #{album.on_spotify}"
+    end
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end

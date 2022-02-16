@@ -1,6 +1,6 @@
 require_relative 'item'
 
-# Create a Book class that inherits from Item
+# Book class that inherits from Item
 class Book < Item
     attr_accessor :publisher, :cover_state
     attr_reader :id
@@ -16,4 +16,3 @@ class Book < Item
         super and @cover_state == 'bad'
     end
 end
-

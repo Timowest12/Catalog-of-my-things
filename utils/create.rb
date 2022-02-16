@@ -1,7 +1,7 @@
 # rubocop: disable Metrics
 # frozen_string_literal: true
 
-# require_relative '../classes/'
+require_relative '../classes/game'
 
 # creator class
 class Creator
@@ -62,7 +62,19 @@ class GameCreator
   def self.create
     puts `clear`
     puts "\n\n\n\t\t  GAME CREATION \n\n"
-    # Code goes here
+
+    print 'Do you want multiplayer? [Y/N]: '
+    multiplayer = gets.chomp.downcase == 'y' || false
+
+    print 'Date of publish [Enter date in format (yyyy-mm-dd)]: '
+    publish_date = gets.chomp
+
+    print 'Last played at date [Enter date in format (yyyy-mm-dd)]: '
+    last_played_at = gets.chomp
+
+    game = Game.new(multiplayer, last_played_at, publish_date)
+    App.class_variable_get(:@@games) << game
+    puts 'Game created successfully'
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "
     gets.chomp

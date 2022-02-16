@@ -3,10 +3,16 @@
 
 require_relative './utils/lists'
 require_relative './utils/create'
+require_relative './utils/data_storage'
 
 # App class
 class App
+  include DataStorage
   @@games = []
+
+  def initialize
+    @games = load_games
+  end
 
   def run
     puts 'Welcome!'
@@ -19,6 +25,7 @@ class App
       get_num(option)
     end
     puts 'Thank you using our Library!'
+    save_games
   end
 
   def menu

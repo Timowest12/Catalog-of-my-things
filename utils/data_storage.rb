@@ -3,6 +3,7 @@
 
 require 'json'
 require_relative '../classes/game'
+require_relative '../classes/musicAlbum'
 
 # module DataStorage
 module DataStorage
@@ -26,6 +27,16 @@ module DataStorage
     end
   end
 
+  def save_albums
+    data = []
+    albums = App.class_variable_get(:@@albums)
+    albums.each do |album|
+      data << ({ name: album.name, genre: album.genre,
+                 on_spotify: album.on_spotify })
+      save_data('album.json', data)
+    end
+  end
+
   def load_games
     filename = 'game.json'
     games = App.class_variable_get(:@@games)
@@ -34,6 +45,20 @@ module DataStorage
       data.map do |game|
         new_game = Game.new(game['multiplayer'], game['last_played_at'], game['publish_date'])
         games << new_game
+      end
+    else
+      []
+    end
+  end
+
+  def load_albums
+    filename = 'album.json'
+    albums = App.class_variable_get(:@@albums)
+    if File.exist? filename
+      data = load_data(filename)
+      data.map do |album|
+        new_album = MusicAlbum.new(album['name'], album['genre'], album['publish_date'], album['on_spotify'])
+        albums << new_album
       end
     else
       []

@@ -1,10 +1,14 @@
 # rubocop: disable Metrics
 # frozen_string_literal: true
-
+require_relative '../classes/musicAlbum'
+require './utils/musicController'
 # require_relative '../classes/'
 
 # creator class
 class Creator
+  
+  
+
   def self.create(option)
     case option
     when 'Book'
@@ -35,15 +39,28 @@ end
 
 # music album creator class
 class MusicAlbumCreator
+  include MusicAlbumModule
+  def initialize
+
+    @albums = []
+  end
+  
   def self.create
     puts `clear`
     puts "\n\n\n\t\t  MUSIC ALBUM CREATION \n\n"
     print 'type the name of the album:'
+    #MusicAlbumModule.save_albums
     name = gets.chomp
-
     print 'type date in format(yyyy-mm-dd)'
     publish_date = gets.chomp
-
+    print 'genre:'
+    genre = gets.chomp
+    print 'is the album on spotify?'
+    on_spotify = gets.chomp
+    #@albums.push(MusicAlbum.new(name, genre, publish_date, on_spotify))
+    #puts newmusicalbum
+    newalbum = MusicAlbum.new(name, genre, publish_date, on_spotify)
+    MusicAlbumModule.savealbum(newalbum)
     puts 'album created succesfully'
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "

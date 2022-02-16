@@ -49,7 +49,6 @@ class MusicAlbumCreator
     puts `clear`
     puts "\n\n\n\t\t  MUSIC ALBUM CREATION \n\n"
     print 'type the name of the album:'
-    #MusicAlbumModule.save_albums
     name = gets.chomp
     print 'type date in format(yyyy-mm-dd)'
     publish_date = gets.chomp
@@ -57,10 +56,8 @@ class MusicAlbumCreator
     genre = gets.chomp
     print 'is the album on spotify?'
     on_spotify = gets.chomp
-    #@albums.push(MusicAlbum.new(name, genre, publish_date, on_spotify))
-    #puts newmusicalbum
     newalbum = MusicAlbum.new(name, genre, publish_date, on_spotify)
-    MusicAlbumModule.savealbum(newalbum)
+    App.class_variable_get(:@@albums) << newalbum
     puts 'album created succesfully'
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "

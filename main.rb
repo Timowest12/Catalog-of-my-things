@@ -6,6 +6,7 @@ require_relative './utils/create'
 
 # App class
 class App
+  @@albums = []
   def run
     puts 'Welcome!'
     loop do

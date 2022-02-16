@@ -31,8 +31,8 @@ module DataStorage
     data = []
     albums = App.class_variable_get(:@@albums)
     albums.each do |album|
-      data << ({ name: album.name, genre: album.genre,
-                 on_spotify: album.on_spotify })
+      data << ({ publish_date: album.publish_date,
+                 on_spotify: album.on_spotify, name: album.name, genre: album.genre })
       save_data('album.json', data)
     end
   end

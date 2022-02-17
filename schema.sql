@@ -31,4 +31,3 @@ ALTER TABLE books ADD CONSTRAINT fk_author_id FOREIGN KEY (author_id) REFERENCES
 ALTER TABLE books ADD CONSTRAINT fk_label_id FOREIGN KEY (label_id) REFERENCES labels(id);
 ALTER TABLE books ADD CONSTRAINT fk_genre_id FOREIGN KEY (genre_id) REFERENCES genres(id);
 ALTER TABLE books ADD CONSTRAINT fk_source_id FOREIGN KEY (source_id) REFERENCES sources(id);
-

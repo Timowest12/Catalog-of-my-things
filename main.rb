@@ -29,9 +29,9 @@ class App
       get_num(option)
     end
     puts `clear`
-    puts "\n\n\n\t\t ---------------------------".bold.red.on_brown
-    puts "\t\t|  CATALOG OF MY THINGS  |".bold.red.on_brown
-    puts "\t\t ---------------------------".bold.red.on_brown
+    puts "\n\n\n\t\t --------------------------- ".bold.red.on_brown
+    puts "\t\t|  CATALOG OF MY THINGS    | ".bold.red.on_brown
+    puts "\t\t --------------------------- ".bold.red.on_brown
     puts "\n\t #{'_'.brown * 53} \n\n"
     puts "\t\t #{' Thank you for using this app! '.bold.on_blue}\n\n"
     puts "\t #{' Now your data will be saved for next time, see you! '.red.on_brown}\n\n"
@@ -44,9 +44,9 @@ class App
 
   def menu
     puts `clear`
-    puts "\n\n\n\t\t ---------------------------".bold.red.on_brown
-    puts "\t\t|  CATALOG OF MY THINGS  |".bold.red.on_brown
-    puts "\t\t ---------------------------".bold.red.on_brown
+    puts "\n\n\n\t\t --------------------------- ".bold.red.on_brown
+    puts "\t\t|  CATALOG OF MY THINGS    | ".bold.red.on_brown
+    puts "\t\t --------------------------- ".bold.red.on_brown
     puts "\t____________________________________________________".brown
     puts "\n\t Please choose an option by entering a number"
     puts "\n\t\t #{' 1 '.red.on_brown} - List all books"

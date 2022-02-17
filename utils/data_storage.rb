@@ -100,7 +100,7 @@ module DataStorage
       object_to_hash(book)
     end
     books_filename = 'books.json'
-    save_data(books_filename, data)
+    save_data(books_filename, books)
   end
 
   def load_books

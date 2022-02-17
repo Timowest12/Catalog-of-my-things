@@ -38,23 +38,23 @@ class BookCreator
     puts `clear`
     puts "\n\n\n\t\t  BOOK CREATION \n\n".magenta.bold
     print "\t\t #{" Book's Title: ".black.on_magenta}  "
-    title = gets.chomp
+    title = gets.chomp.capitalize
     print "\n\t\t #{" Book's Genre: ".black.on_magenta}  "
-    genre = gets.chomp
+    genre = gets.chomp.capitalize
     print "\n\t\t #{" Author's First Name: ".black.on_magenta}  "
-    auth_first_name = gets.chomp
+    auth_first_name = gets.chomp.capitalize
     print "\t\t #{" Author's Last Name: ".black.on_magenta}  "
-    auth_last_name = gets.chomp
+    auth_last_name = gets.chomp.capitalize
     print "\n\t\t #{" Book's Publisher: ".black.on_magenta}  "
-    publisher = gets.chomp
+    publisher = gets.chomp.capitalize
     print "\n\t\t #{" Publish Date (yyyy-mm-dd): ".black.on_magenta}  "
     publish_date = gets.chomp
     print "\n\t\t #{" Book's Color: ".black.on_magenta}  "
-    b_color = gets.chomp
+    b_color = gets.chomp.capitalize
     print "\n\t\t #{" Book's Cover State: ".black.on_magenta}  "
-    cover_state = gets.chomp
+    cover_state = gets.chomp.capitalize
     print "\n\t\t #{" Book's Source: ".black.on_magenta}  "
-    source = gets.chomp
+    source = gets.chomp.capitalize
     print "\n\t\t #{" Is This Book Archived? (y/n): ".black.on_magenta}  "
     archived = gets.chomp
     if archived == 'y'

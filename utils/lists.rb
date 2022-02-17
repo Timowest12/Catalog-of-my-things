@@ -112,7 +112,11 @@ class AuthorsListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE AUTHORS \n\n\n"
-    # Code goes here
+    authors = App.class_variable_get(:@@authors)
+    authors.each do |author|
+      puts "Author id: #{author.id}, First Name: #{author.first_name},
+      Last Name: #{author.last_name}"
+    end
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end

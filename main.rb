@@ -11,11 +11,13 @@ class App
   @@albums = []
   @@genres = []
   @@games = []
+  @@authors = []
 
   def initialize
     @games = load_games
     @albums = load_albums
     @genres = load_genres
+    @authors = load_authors
   end
 
   def run
@@ -32,6 +34,7 @@ class App
     save_games
     save_albums
     save_genres
+    save_author
   end
 
   def menu

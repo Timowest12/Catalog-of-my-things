@@ -3,8 +3,9 @@
 
 require 'json'
 require_relative '../classes/game'
-require_relative '../classes/musicalbum'
 require_relative '../classes/genre'
+require_relative '../classes/musicAlbum'
+require_relative '../classes/author'
 
 # module DataStorage
 module DataStorage
@@ -44,6 +45,12 @@ module DataStorage
     genres.each do |genre|
       data << ({ name: genre.name })
       save_data('genre.json', data)
+  def save_author
+    data = []
+    authors = App.class_variable_get(:@@authors)
+    authors.each do |author|
+      data << ({ first_name: author.first_name, last_name: author.last_name })
+      save_data('author.json', data)
     end
   end
 
@@ -75,6 +82,7 @@ module DataStorage
     end
   end
 
+
   def load_genres
     filename = 'genre.json'
     genres = App.class_variable_get(:@@genres)
@@ -83,6 +91,19 @@ module DataStorage
       data.map do |genre|
         new_genre = Genre.new(genre['name'])
         genres << new_genre
+      end
+    else 
+      []
+    end
+  end
+  def load_authors
+    filename = 'author.json'
+    authors = App.class_variable_get(:@@authors)
+    if File.exist? filename
+      data = load_data(filename)
+      data.map do |author|
+        new_author = Author.new(author['first_name'], author['last_name'])
+        authors << new_author
       end
     else
       []

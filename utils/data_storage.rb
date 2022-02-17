@@ -147,11 +147,11 @@ module DataStorage
         new_genre = Genre.new(genre['name'])
         genres << new_genre
       end
-    else 
+    else
       []
     end
   end
-  
+
   def load_authors
     filename = 'author.json'
     authors = App.class_variable_get(:@@authors)

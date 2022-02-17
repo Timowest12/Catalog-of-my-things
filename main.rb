@@ -30,6 +30,7 @@ class App
     puts 'Thank you using our Library!'
     save_games
     save_albums
+    save_genres
   end
 
   def menu

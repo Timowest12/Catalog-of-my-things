@@ -4,6 +4,7 @@
 require 'json'
 require_relative '../classes/game'
 require_relative '../classes/musicAlbum'
+require_relative '../classes/genre'
 
 # module DataStorage
 module DataStorage
@@ -34,6 +35,15 @@ module DataStorage
       data << ({ publish_date: album.publish_date,
                  on_spotify: album.on_spotify, name: album.name, genre: album.genre })
       save_data('album.json', data)
+    end
+  end
+
+  def save_genres
+    data = []
+    genres = App.class_variable_get(:@@genres)
+    genres.each do |genre|
+      data << ({ name: genre.name })
+      save_data('genre.json', data)
     end
   end
 

@@ -36,26 +36,26 @@ class BookCreator
   include DataStorage
   def self.create
     puts `clear`
-    puts "\n\n\n\t\t  BOOK CREATION \n\n".magenta.bold
-    print "\t\t #{" Book's Title: ".black.on_magenta}  "
+    puts "\n\n\n\t\t  BOOK CREATION \n\n".brown.bold
+    print "\t\t #{" Book's Title: ".bold.red.on_brown}  "
     title = gets.chomp.capitalize
-    print "\n\t\t #{" Book's Genre: ".black.on_magenta}  "
+    print "\n\t\t #{" Book's Genre: ".bold.red.on_brown}  "
     genre = gets.chomp.capitalize
-    print "\n\t\t #{" Author's First Name: ".black.on_magenta}  "
+    print "\n\t\t #{" Author's First Name: ".bold.red.on_brown}  "
     auth_first_name = gets.chomp.capitalize
-    print "\t\t #{" Author's Last Name: ".black.on_magenta}  "
+    print "\t\t #{" Author's Last Name: ".bold.red.on_brown}  "
     auth_last_name = gets.chomp.capitalize
-    print "\n\t\t #{" Book's Publisher: ".black.on_magenta}  "
+    print "\n\t\t #{" Book's Publisher: ".bold.red.on_brown}  "
     publisher = gets.chomp.capitalize
-    print "\n\t\t #{" Publish Date (yyyy-mm-dd): ".black.on_magenta}  "
+    print "\n\t\t #{" Publish Date (yyyy-mm-dd): ".bold.red.on_brown}  "
     publish_date = gets.chomp
-    print "\n\t\t #{" Book's Color: ".black.on_magenta}  "
+    print "\n\t\t #{" Book's Color: ".bold.red.on_brown}  "
     b_color = gets.chomp.capitalize
-    print "\n\t\t #{" Book's Cover State: ".black.on_magenta}  "
+    print "\n\t\t #{" Book's Cover State: ".bold.red.on_brown}  "
     cover_state = gets.chomp.capitalize
-    print "\n\t\t #{" Book's Source: ".black.on_magenta}  "
+    print "\n\t\t #{" Book's Source: ".bold.red.on_brown}  "
     source = gets.chomp.capitalize
-    print "\n\t\t #{" Is This Book Archived? (y/n): ".black.on_magenta}  "
+    print "\n\t\t #{" Is This Book Archived? (y/n): ".bold.red.on_brown}  "
     archived = gets.chomp
     if archived == 'y'
       archived = true

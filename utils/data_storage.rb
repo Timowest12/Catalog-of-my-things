@@ -43,6 +43,8 @@ module DataStorage
       book.label(Label.new(hash['label']['title'], hash['label']['color']), hash['label']['id'])
       book.author(Author.new(hash['author']['first_name'], hash['author']['last_name']), hash['author']['id'])
       book.genre(Genre.new(hash['genre']['title']), hash['genre']['id'])
+      book.source(Source.new(hash['source']['title']), hash['source']['id'])
+      book
     end
   end
 
@@ -92,6 +94,12 @@ module DataStorage
     else
       []
     end
+  end
+
+  def save_book(book)
+    data = object_to_hash(book)
+    books_filename = 'books.json'
+    save_data(books_filename, data)
   end
 end
 # rubocop: enable Metrics

@@ -1,9 +1,13 @@
 # rubocop: disable Metrics
 # frozen_string_literal: true
 require_relative '../classes/musicAlbum'
-# require_relative '../classes/'
-
+require_relative '../classes/genre'
+require_relative '../classes/label'
+require_relative '../classes/author'
+require_relative '../classes/source'
 require_relative '../classes/game'
+require_relative './colors_utils'
+
 
 # creator class
 class Creator
@@ -30,8 +34,46 @@ end
 class BookCreator
   def self.create
     puts `clear`
-    puts "\n\n\n\t\t  BOOK CREATION \n\n"
+    puts "\n\n\n\t\t  BOOK CREATION \n\n".magenta
+    print "\t\t #{" Book's Title: ".black.on_magenta}  "
+    title = gets.chomp
+    print "\n\t\t #{" Book's Genre: ".black.on_magenta}  "
+    genre = gets.chomp
+    print "\n\t\t #{" Author's First Name: ".black.on_magenta}  "
+    auth_first_name = gets.chomp
+    print "\t\t #{" Author's Last Name: ".black.on_magenta}  "
+    auth_last_name = gets.chomp
+    print "\n\t\t #{" Book's Publisher: ".black.on_magenta}  "
+    publisher = gets.chomp
+    print "\n\t\t #{" Publish Date (yyyy-mm-dd): ".black.on_magenta}  "
+    publish_date = gets.chomp
+    print "\n\t\t #{" Book's Color: ".black.on_magenta}  "
+    b_color = gets.chomp
+    print "\n\t\t #{" Book's Cover State: ".black.on_magenta}  "
+    cover_state = gets.chomp
+    print "\n\t\t #{" Book's Source: ".black.on_magenta}  "
+    source = gets.chomp
+    print "\n\t\t #{" Is This Book Archived? (y/n): ".black.on_magenta}  "
+    archived = gets.chomp
+    if archived == 'y'
+      archived = true
+    else
+      archived = false
+    end
 
+    label = Label.new(title, b_color)
+    author = Author.new(auth_first_name, auth_last_name)
+    genre = Genre.new(genre)
+    source = Source.new(source)
+    book = Book.new(Date.parse(publish_date), publisher, cover_state, archived: archived)
+
+    book.author(author)
+    book.genre(genre)
+    book.label(label)
+    book.source(source)
+
+    puts book;
+    
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "
     gets.chomp

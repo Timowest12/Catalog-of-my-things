@@ -87,7 +87,10 @@ class GenresListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE GENRES \n\n\n"
-    # Code goes here
+    genres = App.class_variable_get(:@@genres)
+    genres.each do |genre|
+      puts "Genre: #{genre.name}"
+    end
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end

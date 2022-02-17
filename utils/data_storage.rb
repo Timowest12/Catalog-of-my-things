@@ -27,8 +27,10 @@ module DataStorage
     obj.instance_variables.each_with_object({}) do |var, hash|
       key = var.to_s.delete('@')
       value = obj.instance_variable_get(var)
-      if %w[Genre Source Author Label Item Book Date Movie MusicAlbum].include?(value.class.name)
+      if %w[Genre Source Author Label Item Book Movie MusicAlbum].include?(value.class.name)
         value = object_to_hash(value)
+      elsif %[Date].include?(value.class.name)
+        value = value.to_s
       end
       hash[key] = value
       hash
@@ -39,10 +41,10 @@ module DataStorage
     case classname
     when 'Book'
       book = Book.new( hash['publish_date'], hash['publisher'], hash['cover_state'], hash['archived'], hash['id'])
-      book.label(Label.new(hash['label']['title'], hash['label']['color']), hash['label']['id'])
-      book.author(Author.new(hash['author']['first_name'], hash['author']['last_name']), hash['author']['id'])
-      book.genre(Genre.new(hash['genre']['title']), hash['genre']['id'])
-      book.source(Source.new(hash['source']['title']), hash['source']['id'])
+      book.label(Label.new(hash['label']['title'], hash['label']['color'], hash['label']['id']))
+      book.author(Author.new(hash['author']['first_name'], hash['author']['last_name'], hash['author']['id']))
+      book.genre(Genre.new(hash['genre']['title'], hash['genre']['id']))
+      book.source(Source.new(hash['source']['title'], hash['source']['id']))
       book
     end
   end

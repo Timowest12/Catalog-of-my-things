@@ -95,8 +95,10 @@ module DataStorage
     end
   end
 
-  def save_book(book)
-    data = object_to_hash(book)
+  def save_books
+    books = App.class_variable_get(:@@books).map do |book|
+      object_to_hash(book)
+    end
     books_filename = 'books.json'
     save_data(books_filename, data)
   end
@@ -111,6 +113,8 @@ module DataStorage
       end 
     else
       []
+    end
+  end
     
 
       

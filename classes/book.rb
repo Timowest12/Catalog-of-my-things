@@ -4,6 +4,8 @@ require_relative 'item'
 class Book < Item
     attr_accessor :publisher, :cover_state
     attr_reader :id
+
+    @@books = []
     
     def initialize(publish_date, publisher, cover_state, archived: false, id=rand(1..10_000))
         @id = id

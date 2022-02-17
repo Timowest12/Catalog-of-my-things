@@ -8,14 +8,13 @@ require_relative '../classes/source'
 require_relative '../classes/game'
 require_relative '../classes/book'
 require_relative './colors_utils'
+require_relative './data_storage'
 require 'date'
 
 
 # creator class
 class Creator
-  
-  
-
+  include DataStorage 
   def self.create(option)
     case option
     when 'Book'
@@ -34,6 +33,7 @@ end
 
 # book creator class
 class BookCreator
+  include DataStorage
   def self.create
     puts `clear`
     puts "\n\n\n\t\t  BOOK CREATION \n\n".magenta.bold
@@ -70,12 +70,15 @@ class BookCreator
     source = Source.new(source)
     book = Book.new(Date.parse(publish_date), publisher, cover_state, archived: archived)
 
-    book.author(author)
-    book.genre(genre)
-    book.label(label)
-    book.source(source)
+    author.add_item(book) unless Author.class_variable_get(:@@items).include?(book)
+    genre.add_item(book) unless Genre.class_variable_get(:@@items).include?(book)
+    source.add_item(book) unless Source.class_variable_get(:@@items).include?(book)
+    label.add_item(book) unless Label.class_variable_get(:@@items).include?(book)
 
-    puts book;
+    Book.class_variable_get(:@@books) << book
+
+    save_book(book)
+    puts "\n\n\t\t #{' Book added successfully '.bold.on_green}"
 
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "

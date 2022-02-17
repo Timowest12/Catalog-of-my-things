@@ -1,6 +1,6 @@
 require_relative 'item'
 
-class Genre < Item
+class Genre
   attr_accessor :name
 
   @@genrearr = []

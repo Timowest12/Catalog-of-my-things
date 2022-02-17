@@ -1,5 +1,4 @@
-require_relative 'item'
-
+# Class Genre
 class Genre
   attr_accessor :name
 

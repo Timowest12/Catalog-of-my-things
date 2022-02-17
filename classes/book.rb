@@ -6,7 +6,12 @@ class Book < Item
     attr_reader :id
     
     def initialize(publish_date, publisher, cover_state, archived = false, my_id = rand(1..10_000))
-        super(publish_date, archived, my_id)
+        if(publish_date.is_a?(String))
+          super(Date.parse(publish_date), archived, my_id)
+        else
+          super(publish_date, archived, my_id)
+        end
+        
         @publisher = publisher
         @cover_state = cover_state
     end

@@ -1,5 +1,7 @@
-require_relative 'item'
+# frozen_string_literal: true
 
+require_relative 'item'
+# genre
 class Genre
   attr_accessor :name, :genrearr, :id
 
@@ -8,7 +10,8 @@ class Genre
     @name = name
     @genrearr = []
   end
-def add_item(item)
+
+  def add_item(item)
     @genrearr << item
   end
 end

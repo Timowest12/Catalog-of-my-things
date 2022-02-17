@@ -3,7 +3,7 @@
 
 require 'json'
 require_relative '../classes/game'
-require_relative '../classes/musicAlbum'
+require_relative '../classes/musicalbum'
 require_relative '../classes/genre'
 
 # module DataStorage

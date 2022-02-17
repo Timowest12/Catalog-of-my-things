@@ -1,6 +1,7 @@
 # rubocop: disable Metrics
 # frozen_string_literal: true
-require_relative '../classes/musicAlbum'
+
+require_relative '../classes/musicalbum'
 require_relative '../classes/genre'
 # require_relative '../classes/'
 
@@ -8,9 +9,6 @@ require_relative '../classes/game'
 
 # creator class
 class Creator
-  
-  
-
   def self.create(option)
     case option
     when 'Book'
@@ -42,10 +40,9 @@ end
 # music album creator class
 class MusicAlbumCreator
   def initialize
-
     @albums = []
   end
-  
+
   def self.create
     puts `clear`
     puts "\n\n\n\t\t  MUSIC ALBUM CREATION \n\n"

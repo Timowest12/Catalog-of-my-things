@@ -98,7 +98,7 @@ end
 class GenresListing < Listing
   def self.list
     puts `clear`
-    puts "\n\n\n\t\t     ALL AVAILABLE GENRES \n\n\n"
+    puts "\n\n\n\t\t     ALL AVAILABLE GENRES \n\n\n".brown.bold
     genres = App.class_variable_get(:@@genres)
     genres.each do |genre|
       puts "Genre: #{genre.name}"
@@ -155,7 +155,7 @@ end
 class AuthorsListing < Listing
   def self.list
     puts `clear`
-    puts "\n\n\n\t\t     ALL AVAILABLE AUTHORS \n\n\n"
+    puts "\n\n\n\t\t     ALL AVAILABLE AUTHORS \n\n\n".brown.bold
     authors = App.class_variable_get(:@@authors)
     authors.each do |author|
       puts "Author id: #{author.id}, First Name: #{author.first_name},
@@ -170,7 +170,7 @@ end
 class SourcesListing < Listing
   def self.list
     puts `clear`
-    puts "\n\n\n\t\t     ALL AVAILABLE SOURCES \n\n\n"
+    puts "\n\n\n\t\t     ALL AVAILABLE SOURCES \n\n\n".brown.bold
     # Code goes here
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp

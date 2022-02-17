@@ -77,6 +77,9 @@ module DataStorage
     genres.each do |genre|
       data << ({ name: genre.name })
       save_data('genre.json', data)
+    end
+  end
+
   def save_author
     data = []
     authors = App.class_variable_get(:@@authors)
@@ -129,6 +132,11 @@ module DataStorage
       data = load_data(books_filename)
       books = data.map do |book|
         books << hash_to_object(book, 'Book')
+      end
+    else
+      []
+    end
+  end
 
   def load_genres
     filename = 'genre.json'
@@ -143,6 +151,7 @@ module DataStorage
       []
     end
   end
+  
   def load_authors
     filename = 'author.json'
     authors = App.class_variable_get(:@@authors)

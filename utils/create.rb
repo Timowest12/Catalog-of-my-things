@@ -1,7 +1,7 @@
 # rubocop: disable Metrics
 # frozen_string_literal: true
 
-require_relative '../classes/musicAlbum'
+require_relative '../classes/musicalbum'
 require_relative '../classes/genre'
 require_relative '../classes/label'
 require_relative '../classes/author'
@@ -96,6 +96,8 @@ class MusicAlbumCreator
     publish_date = gets.chomp
     print 'genre:'
     genre = gets.chomp
+    newgenre = Genre.new(genre)
+    App.class_variable_get(:@@genres) << newgenre
     print 'is the album on spotify?'
     on_spotify = gets.chomp
     newalbum = MusicAlbum.new(name, genre, publish_date, on_spotify)

@@ -39,7 +39,10 @@ module DataStorage
   def hash_to_object(hash, classname)
     case classname
     when 'Book'
-      let book = Book.new(hash['title'], hash['author'], hash['rentals'])
+      book = Book.new( hash['publish_date'], hash['publisher'], hash['cover_state'], archived: hash['archived'], hash['id'])
+      book.label(Label.new(hash['label']['title'], hash['label']['color']), hash['label']['id'])
+      book.author(Author.new(hash['author']['first_name'], hash['author']['last_name']), hash['author']['id'])
+      book.genre(Genre.new(hash['genre']['title']), hash['genre']['id'])
     end
   end
 

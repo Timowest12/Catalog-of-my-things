@@ -56,7 +56,7 @@ class MusicAlbumCreator
     print 'genre:'
     genre = gets.chomp
     newgenre = Genre.new(genre)
-    puts newgenre
+    App.class_variable_get(:@@genres) << newgenre
     print 'is the album on spotify?'
     on_spotify = gets.chomp
     newalbum = MusicAlbum.new(name, genre, publish_date, on_spotify)

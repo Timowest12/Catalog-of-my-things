@@ -3,7 +3,7 @@ require_relative '../classes/book'
 
 describe Book do
   context 'When testing the Book class' do
-    it 'A newly created book has a published_date property of type Date' do
+    it 'A newly created book has a publish_date property of type Date' do
         book1 = Book.new(Date.new(2019, 1, 1), 'Test Publisher', 'Good', false)
         book2 = Book.new('2019-01-01', 'Test Publisher', 'Good', true)
 

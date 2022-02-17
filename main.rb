@@ -15,6 +15,7 @@ class App
   def initialize
     @games = load_games
     @albums = load_albums
+    @genres = load_genres
   end
 
   def run

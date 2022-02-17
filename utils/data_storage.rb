@@ -74,5 +74,19 @@ module DataStorage
       []
     end
   end
+
+  def load_genres
+    filename = 'genre.json'
+    genres = App.class_variable_get(:@@genres)
+    if File.exist? filename
+      data = load_data(filename)
+      data.map do |genre|
+        new_genre = Genre.new(genre['name'])
+        genres << new_genre
+      end
+    else
+      []
+    end
+  end
 end
 # rubocop: enable Metrics

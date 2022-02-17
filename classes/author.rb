@@ -5,8 +5,8 @@ class Author
   attr_accessor :first_name, :last_name
   @@items = []
 
-  def initialize(first_name, last_name, id=rand(1..10_000))
-    @id = id
+  def initialize(first_name, last_name, my_id = rand(1..10_000))
+    @id = my_id
     @first_name = first_name
     @last_name = last_name
   end

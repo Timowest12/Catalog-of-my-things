@@ -4,8 +4,8 @@ class Label
 
     @@items = []
   
-    def initialize(title, color, id=rand(1..10_000))
-      @id = id
+    def initialize(title, color, my_id = rand(1..10_000))
+      @id = my_id
       @title = title
       @color = color
     end

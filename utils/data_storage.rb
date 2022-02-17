@@ -9,7 +9,6 @@ require_relative '../classes/source'
 require_relative '../classes/item'
 require_relative '../classes/game'
 require_relative '../classes/musicAlbum'
-require_relative '../classes/movie'
 require_relative '../classes/book'
 
 # module DataStorage
@@ -39,7 +38,7 @@ module DataStorage
   def hash_to_object(hash, classname)
     case classname
     when 'Book'
-      book = Book.new( hash['publish_date'], hash['publisher'], hash['cover_state'], archived: hash['archived'], hash['id'])
+      book = Book.new( hash['publish_date'], hash['publisher'], hash['cover_state'], hash['archived'], hash['id'])
       book.label(Label.new(hash['label']['title'], hash['label']['color']), hash['label']['id'])
       book.author(Author.new(hash['author']['first_name'], hash['author']['last_name']), hash['author']['id'])
       book.genre(Genre.new(hash['genre']['title']), hash['genre']['id'])
@@ -101,5 +100,20 @@ module DataStorage
     books_filename = 'books.json'
     save_data(books_filename, data)
   end
+
+  def load_books
+    books_filename = 'books.json'
+    books = App.class_variable_get(:@@books)
+    if File.exist? books_filename
+      data = load_data(books_filename)
+      books = data.map do |book|
+        books << hash_to_object(book, 'Book')
+      end 
+    else
+      []
+    
+
+      
+      
 end
 # rubocop: enable Metrics

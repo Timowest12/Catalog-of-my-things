@@ -68,16 +68,15 @@ class BookCreator
     author = Author.new(auth_first_name, auth_last_name)
     genre = Genre.new(genre)
     source = Source.new(source)
-    book = Book.new(Date.parse(publish_date), publisher, cover_state, archived: archived)
+    book = Book.new(Date.parse(publish_date), publisher, cover_state, archived)
 
     author.add_item(book) unless Author.class_variable_get(:@@items).include?(book)
     genre.add_item(book) unless Genre.class_variable_get(:@@items).include?(book)
     source.add_item(book) unless Source.class_variable_get(:@@items).include?(book)
     label.add_item(book) unless Label.class_variable_get(:@@items).include?(book)
 
-    Book.class_variable_get(:@@books) << book
+    App.class_variable_get(:@@books) << book
 
-    save_book(book)
     puts "\n\n\t\t #{' Book added successfully '.bold.on_green}"
 
     puts "\n\n\n\t\t Press any key to go back to the main menu"

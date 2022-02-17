@@ -5,8 +5,8 @@ class Source
     attr_reader :id
     @@items = []
 
-    def initialize(name, id=rand(1..10_000))
-        @id = id
+    def initialize(name, my_id = rand(1..10_000))
+        @id = my_id
         @name = name
     end
 

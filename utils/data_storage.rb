@@ -9,7 +9,7 @@ require_relative '../classes/source'
 require_relative '../classes/item'
 require_relative '../classes/game'
 require_relative '../classes/genre'
-require_relative '../classes/musicAlbum'
+require_relative '../classes/musicalbum'
 require_relative '../classes/book'
 
 # module DataStorage

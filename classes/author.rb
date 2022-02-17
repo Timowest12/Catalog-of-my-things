@@ -3,6 +3,7 @@
 # Author class
 class Author
   attr_accessor :first_name, :last_name
+
   @@items = []
 
   def initialize(first_name, last_name, my_id = rand(1..10_000))

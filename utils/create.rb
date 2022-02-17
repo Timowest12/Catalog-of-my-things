@@ -1,5 +1,6 @@
 # rubocop: disable Metrics
 # frozen_string_literal: true
+
 require_relative '../classes/musicAlbum'
 require_relative '../classes/genre'
 require_relative '../classes/label'
@@ -11,10 +12,9 @@ require_relative './colors_utils'
 require_relative './data_storage'
 require 'date'
 
-
 # creator class
 class Creator
-  include DataStorage 
+  include DataStorage
   def self.create(option)
     case option
     when 'Book'
@@ -47,7 +47,7 @@ class BookCreator
     auth_last_name = gets.chomp.capitalize
     print "\n\t\t #{" Book's Publisher: ".bold.red.on_brown}  "
     publisher = gets.chomp.capitalize
-    print "\n\t\t #{" Publish Date (yyyy-mm-dd): ".bold.red.on_brown}  "
+    print "\n\t\t #{' Publish Date (yyyy-mm-dd): '.bold.red.on_brown}  "
     publish_date = gets.chomp
     print "\n\t\t #{" Book's Color: ".bold.red.on_brown}  "
     b_color = gets.chomp.capitalize
@@ -55,13 +55,9 @@ class BookCreator
     cover_state = gets.chomp.capitalize
     print "\n\t\t #{" Book's Source: ".bold.red.on_brown}  "
     source = gets.chomp.capitalize
-    print "\n\t\t #{" Is This Book Archived? (y/n): ".bold.red.on_brown}  "
+    print "\n\t\t #{' Is This Book Archived? (y/n): '.bold.red.on_brown}  "
     archived = gets.chomp
-    if archived == 'y'
-      archived = true
-    else
-      archived = false
-    end
+    archived = archived == 'y'
     puts "\n\n"
 
     label = Label.new(title, b_color)
@@ -88,10 +84,9 @@ end
 # music album creator class
 class MusicAlbumCreator
   def initialize
-
     @albums = []
   end
-  
+
   def self.create
     puts `clear`
     puts "\n\n\n\t\t  MUSIC ALBUM CREATION \n\n"

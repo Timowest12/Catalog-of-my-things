@@ -29,7 +29,7 @@ module DataStorage
       value = obj.instance_variable_get(var)
       if %w[Genre Source Author Label Item Book Movie MusicAlbum].include?(value.class.name)
         value = object_to_hash(value)
-      elsif %[Date].include?(value.class.name)
+      elsif %(Date).include?(value.class.name)
         value = value.to_s
       end
       hash[key] = value
@@ -40,7 +40,8 @@ module DataStorage
   def hash_to_object(hash, classname)
     case classname
     when 'Book'
-      book = Book.new( Date.parse(hash['publish_date']), hash['publisher'], hash['cover_state'], hash['archived'], hash['id'])
+      book = Book.new(Date.parse(hash['publish_date']), hash['publisher'], hash['cover_state'], hash['archived'],
+                      hash['id'])
       book.assign_label(Label.new(hash['label']['title'], hash['label']['color'], hash['label']['id']))
       book.assign_author(Author.new(hash['author']['first_name'], hash['author']['last_name'], hash['author']['id']))
       book.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
@@ -112,14 +113,10 @@ module DataStorage
       data = load_data(books_filename)
       books = data.map do |book|
         books << hash_to_object(book, 'Book')
-      end 
+      end
     else
       []
     end
   end
-    
-
-      
-      
 end
 # rubocop: enable Metrics

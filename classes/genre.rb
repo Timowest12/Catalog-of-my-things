@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Class Genre
 class Genre
   attr_accessor :name
@@ -8,7 +10,7 @@ class Genre
     @id = my_id
     @name = name
   end
-  
+
   def add_item(item)
     item.assign_genre(self)
     @@items << item unless @@items.include?(item)

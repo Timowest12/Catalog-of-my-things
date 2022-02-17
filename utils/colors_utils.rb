@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class String
   def black
     "\e[30m#{self}\e[0m"

@@ -12,7 +12,7 @@ class Author
   end
 
   def add_item(item)
-    item.author(self)
+    item.assign_author(self)
     @@items << item unless @@items.include?(item)
   end
 end

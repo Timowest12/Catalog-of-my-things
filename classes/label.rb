@@ -11,7 +11,7 @@ class Label
     end
   
     def add_item(item)
-      item.label(self)
+      item.assign_label(self)
       @@items << item unless @@items.include?(item)
     end
   end

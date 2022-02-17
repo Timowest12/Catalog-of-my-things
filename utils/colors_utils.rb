@@ -86,4 +86,8 @@ class String
   def bum
     to_s.bold.underline.magenta
   end
+
+  def bub
+    to_s.bold.underline.brown
+  end
 end

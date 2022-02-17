@@ -1,7 +1,8 @@
 # rubocop: disable Metrics
 # frozen_string_literal: true
 
-# require_relative '../classes/'
+require_relative './colors_utils'
+require_relative './data_storage'
 
 # class listing
 class Listing
@@ -33,10 +34,23 @@ end
 class BookListing < Listing
   def self.list
     puts `clear`
-    puts "\n\n\n\t\t     ALL AVAILABLE BOOKS \n\n\n"
-    # Code goes here
+    puts "\n\n\n\t\t     ALL AVAILABLE BOOKS \n\n\n".brown.bold
+    books = App.class_variable_get(:@@books)
+    if books.empty?
+      puts "\n\t\t #{' There are no books yet! Please add some books. '.on_red} \n\n"
+    end
+    books.each do |book|
+      archived_text = 'No'
+      archived_text = 'Yes' if book.can_be_archived?
+      first_name_capitalized = book.author.first_name.split(' ').map(&:capitalize).join(' ')
+      last_name_capitalized = book.author.last_name.split(' ').map(&:capitalize).join(' ')
 
-    puts "\n\n\n\t\t Press any key to go back to the main menu"
+      puts "\n\t #{'ID:'.bub}  #{book.id}  #{'Title:'.bub}  #{book.label.title}    #{'Author:'.bub}  #{first_name_capitalized} #{last_name_capitalized} #{}  #{'Genre:'.bub}  #{book.genre.name} \n"
+      puts "\t #{'Publisher:'.bub}  #{book.publisher}  #{'Publish Date:'.bub}  #{book.publish_date.to_s}   #{'Cover State:'.bub}  #{book.cover_state} \n"
+      puts "\t #{'Source:'.bub}  #{book.source.name}  #{'Color:'.bub}  #{book.label.color}  #{'Archived:'.bub}  #{archived_text} \n\n\n"
+    end
+
+    puts "\n\n\n\t\t Press any key to go back to the main menu\n"
     gets.chomp
   end
 end

@@ -8,8 +8,9 @@ class Genre
     @id = my_id
     @name = name
   end
+  
   def add_item(item)
-    item.genre(self)
+    item.assign_genre(self)
     @@items << item unless @@items.include?(item)
   end
 end

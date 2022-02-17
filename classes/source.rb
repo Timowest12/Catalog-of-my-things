@@ -11,7 +11,7 @@ class Source
     end
 
     def add_item(item)
-        item.source(self)
+        item.assign_source(self)
         @@items << item unless @@items.include?(item)
     end
 end

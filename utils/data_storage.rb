@@ -41,10 +41,10 @@ module DataStorage
     case classname
     when 'Book'
       book = Book.new( Date.parse(hash['publish_date']), hash['publisher'], hash['cover_state'], hash['archived'], hash['id'])
-      book.label(Label.new(hash['label']['title'], hash['label']['color'], hash['label']['id']))
-      book.author(Author.new(hash['author']['first_name'], hash['author']['last_name'], hash['author']['id']))
-      book.genre(Genre.new(hash['genre']['title'], hash['genre']['id']))
-      book.source(Source.new(hash['source']['title'], hash['source']['id']))
+      book.assign_label(Label.new(hash['label']['title'], hash['label']['color'], hash['label']['id']))
+      book.assign_author(Author.new(hash['author']['first_name'], hash['author']['last_name'], hash['author']['id']))
+      book.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
+      book.assign_source(Source.new(hash['source']['name'], hash['source']['id']))
       book
     end
   end

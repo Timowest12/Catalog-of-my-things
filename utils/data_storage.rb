@@ -2,8 +2,15 @@
 # frozen_string_literal: true
 
 require 'json'
+require_relative '../classes/genre'
+require_relative '../classes/label'
+require_relative '../classes/author'
+require_relative '../classes/source'
+require_relative '../classes/item'
 require_relative '../classes/game'
 require_relative '../classes/musicAlbum'
+require_relative '../classes/movie'
+require_relative '../classes/book'
 
 # module DataStorage
 module DataStorage
@@ -15,6 +22,25 @@ module DataStorage
 
   def load_data(filename)
     JSON.parse(File.read(filename))
+  end
+
+  def object_to_hash(obj)
+    obj.instance_variables.each_with_object({}) do |var, hash|
+      key = var.to_s.delete('@')
+      value = obj.instance_variable_get(var)
+      if %w[Genre Source Author Label Item Book Date Movie MusicAlbum].include?(value.class.name)
+        value = object_to_hash(value)
+      end
+      hash[key] = value
+      hash
+    end
+  end
+
+  def hash_to_object(hash, classname)
+    case classname
+    when 'Book'
+      let book = Book.new(hash['title'], hash['author'], hash['rentals'])
+    end
   end
 
   def save_games

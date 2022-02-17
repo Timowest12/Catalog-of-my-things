@@ -6,7 +6,9 @@ require_relative '../classes/label'
 require_relative '../classes/author'
 require_relative '../classes/source'
 require_relative '../classes/game'
+require_relative '../classes/book'
 require_relative './colors_utils'
+require 'date'
 
 
 # creator class
@@ -34,7 +36,7 @@ end
 class BookCreator
   def self.create
     puts `clear`
-    puts "\n\n\n\t\t  BOOK CREATION \n\n".magenta
+    puts "\n\n\n\t\t  BOOK CREATION \n\n".magenta.bold
     print "\t\t #{" Book's Title: ".black.on_magenta}  "
     title = gets.chomp
     print "\n\t\t #{" Book's Genre: ".black.on_magenta}  "
@@ -60,6 +62,7 @@ class BookCreator
     else
       archived = false
     end
+    puts "\n\n"
 
     label = Label.new(title, b_color)
     author = Author.new(auth_first_name, auth_last_name)
@@ -73,7 +76,7 @@ class BookCreator
     book.source(source)
 
     puts book;
-    
+
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "
     gets.chomp

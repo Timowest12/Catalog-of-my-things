@@ -28,32 +28,40 @@ class App
 
       get_num(option)
     end
-    puts 'Thank you using our Library!'
+    puts `clear`
+    puts "\n\n\n\t\t ---------------------------".bold.red.on_brown
+    puts "\t\t|  CATALOG OF MY THINGS  |".bold.red.on_brown
+    puts "\t\t ---------------------------".bold.red.on_brown
+    puts "\n\t #{'_'.brown * 53} \n\n"
+    puts "\t\t #{' Thank you for using this app! '.bold.on_blue}\n\n"
+    puts "\t #{' Now your data will be saved for next time, see you! '.red.on_brown}\n\n"
+    puts "\n\t #{'_'.brown * 53} \n\n"
     save_games
     save_albums
     save_books
+    sleep(2)
   end
 
   def menu
     puts `clear`
-    puts "\n\n\n\t\t ---------------------------".bold.on_magenta
-    puts "\t\t|  CATALOG OF MY THINGS  |".bold.on_magenta
-    puts "\t\t ---------------------------".bold.on_magenta
-    puts "\t____________________________________________________".magenta
+    puts "\n\n\n\t\t ---------------------------".bold.red.on_brown
+    puts "\t\t|  CATALOG OF MY THINGS  |".bold.red.on_brown
+    puts "\t\t ---------------------------".bold.red.on_brown
+    puts "\t____________________________________________________".brown
     puts "\n\t Please choose an option by entering a number"
-    puts "\n\t\t #{' 1 '.brown.on_magenta} - List all books\n"
-    puts "\n\t\t #{' 2 '.brown.on_magenta} - List all music albums \n"
-    puts "\n\t\t #{' 3 '.brown.on_magenta} - List all movies\n"
-    puts "\n\t\t #{' 4 '.brown.on_magenta} - List all games\n"
-    puts "\n\t\t #{' 5 '.brown.on_magenta} - List all genres\n"
-    puts "\n\t\t #{' 6 '.brown.on_magenta} - List all labels\n"
-    puts "\n\t\t #{' 7 '.brown.on_magenta} - List all authors\n"
-    puts "\n\t\t #{' 8 '.brown.on_magenta} - List all sources\n"
-    puts "\n\t\t #{' 9 '.brown.on_magenta} - Add a book\n"
-    puts "\n\t\t #{' 10 '.brown.on_magenta} - Add a music album\n"
-    puts "\n\t\t #{' 11 '.brown.on_magenta} - Add a movie\n"
-    puts "\n\t\t #{' 12 '.brown.on_magenta} - Add a game\n"
-    puts "\n\t\t #{' 13 '.brown.on_magenta} - #{' Exit '.bold.on_red}\n\t #{'_'.magenta * 53} \n\n"
+    puts "\n\t\t #{' 1 '.red.on_brown} - List all books"
+    puts "\n\t\t #{' 2 '.red.on_brown} - List all music albums "
+    puts "\n\t\t #{' 3 '.red.on_brown} - List all movies"
+    puts "\n\t\t #{' 4 '.red.on_brown} - List all games"
+    puts "\n\t\t #{' 5 '.red.on_brown} - List all genres"
+    puts "\n\t\t #{' 6 '.red.on_brown} - List all labels"
+    puts "\n\t\t #{' 7 '.red.on_brown} - List all authors"
+    puts "\n\t\t #{' 8 '.red.on_brown} - List all sources"
+    puts "\n\t\t #{' 9 '.red.on_brown} - Add a book"
+    puts "\n\t\t #{' 10 '.red.on_brown} - Add a music album"
+    puts "\n\t\t #{' 11 '.red.on_brown} - Add a movie"
+    puts "\n\t\t #{' 12 '.red.on_brown} - Add a game"
+    puts "\n\t\t #{' 13 '.red.on_brown} - #{' Exit '.bold.on_red}\n\t #{'_'.brown * 53} \n\n"
     print "\t\t  "
   end
 

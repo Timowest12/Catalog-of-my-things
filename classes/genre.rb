@@ -1,13 +1,17 @@
-require_relative 'item'
+# frozen_string_literal: true
 
-class Genre < Item
-  attr_accessor :name
+require_relative 'item'
+# genre
+class Genre
+  attr_accessor :name, :genrearr, :id
 
   def initialize(name)
+    @id = id || Random.rand(1..100)
     @name = name
-    @arr_igenrearr = []
+    @genrearr = []
   end
-def add_item(item)
+
+  def add_item(item)
     @genrearr << item
   end
 end

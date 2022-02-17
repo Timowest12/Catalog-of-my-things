@@ -9,12 +9,14 @@ require_relative './utils/data_storage'
 class App
   include DataStorage
   @@albums = []
+  @@genres = []
   @@games = []
   @@authors = []
 
   def initialize
     @games = load_games
     @albums = load_albums
+    @genres = load_genres
     @authors = load_authors
   end
 
@@ -31,6 +33,7 @@ class App
     puts 'Thank you using our Library!'
     save_games
     save_albums
+    save_genres
     save_author
   end
 

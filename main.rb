@@ -16,8 +16,6 @@ class App
     @games = load_games
     @albums = load_albums
     @books = load_books
-    @genres = load_genres
-    @authors = load_authors
   end
 
   def run

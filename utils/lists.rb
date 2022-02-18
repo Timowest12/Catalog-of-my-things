@@ -59,10 +59,20 @@ class MusicAlbumListing < Listing
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE MUSIC ALBUMS \n\n\n".brown.bold
     albums = App.class_variable_get(:@@albums)
+    puts "\n\t\t #{' There are no albums yet! Please add some music albums. '.on_red} \n\n" if books.empty?
+
     albums.each do |album|
-      puts "name: #{album.name}, genre: #{album.genre},
-      Publish Date: #{album.publish_date}, on spotify: #{album.on_spotify}"
-    end
+      archived_text = 'No'
+      archived_text = 'Yes' if album.can_be_archived?
+      on_spotify_text = 'No'
+      on_spotify_text = 'Yes' if album.on_spotify
+      first_name_capitalized = album.author.first_name.split(' ').map(&:capitalize).join(' ')
+      last_name_capitalized = album.author.last_name.split(' ').map(&:capitalize).join(' ')
+
+      puts "\n\t #{'ID:'.bub}  #{album.id}  #{'Title:'.bub}  #{album.label.title}    #{'Singer:'.bub}  #{first_name_capitalized} #{last_name_capitalized}   #{'Genre:'.bub}  #{album.genre.name} \n"
+      puts "\t #{'Publish Date:'.bub}  #{album.publish_date}   #{'Source:'.bub}  #{album.source.name} \n"
+      puts "\t #{'Archived:'.bub}  #{archived_text}    #{'On Spotify:'.bub}  #{on_spotify_text}\n\n\n"
+
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end

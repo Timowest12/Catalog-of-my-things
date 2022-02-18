@@ -70,7 +70,7 @@ class MusicAlbumListing < Listing
       last_name_capitalized = album.author.last_name.split(' ').map(&:capitalize).join(' ')
 
       puts "\n\t #{'ID:'.bub}  #{album.id}  #{'Title:'.bub}  #{album.label.title}    #{'Singer:'.bub}  #{first_name_capitalized} #{last_name_capitalized}   #{'Genre:'.bub}  #{album.genre.name} \n"
-      puts "\t #{'Publish Date:'.bub}  #{album.publish_date}   #{'Source:'.bub}  #{album.source.name} \n"
+      puts "\t #{'Publish Date:'.bub}  #{album.publish_date}      #{'Source:'.bub}  #{album.source.name}      #{'Color:'.bub}  #{album.label.color} \n"
       puts "\t #{'Archived:'.bub}  #{archived_text}    #{'On Spotify:'.bub}  #{on_spotify_text}\n\n\n"
 
     puts "\n\n\n\t\t Press any key to go back to the main menu"

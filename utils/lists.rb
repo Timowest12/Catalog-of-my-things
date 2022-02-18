@@ -1,5 +1,5 @@
 # rubocop: disable Metrics
-# frozen_string_literal: true
+# rubocop: disable Layout/LineLength
 
 require_relative './colors_utils'
 require_relative './data_storage'
@@ -40,8 +40,8 @@ class BooksListing < Listing
     books.each do |book|
       archived_text = 'No'
       archived_text = 'Yes' if book.can_be_archived?
-      first_name_capitalized = book.author.first_name.split(' ').map(&:capitalize).join(' ')
-      last_name_capitalized = book.author.last_name.split(' ').map(&:capitalize).join(' ')
+      first_name_capitalized = book.author.first_name.split.map(&:capitalize).join(' ')
+      last_name_capitalized = book.author.last_name.split.map(&:capitalize).join(' ')
 
       puts "\n\t #{'ID:'.bub}  #{book.id}  #{'Title:'.bub}  #{book.label.title}    #{'Author:'.bub}  #{first_name_capitalized} #{last_name_capitalized}   #{'Genre:'.bub}  #{book.genre.name} \n"
       puts "\t #{'Publisher:'.bub}  #{book.publisher}  #{'Publish Date:'.bub}  #{book.publish_date}   #{'Cover State:'.bub}  #{book.cover_state} \n"
@@ -66,8 +66,8 @@ class MusicAlbumsListing < Listing
       archived_text = 'Yes' if album.can_be_archived?
       on_spotify_text = 'No'
       on_spotify_text = 'Yes' if album.on_spotify
-      first_name_capitalized = album.author.first_name.split(' ').map(&:capitalize).join(' ')
-      last_name_capitalized = album.author.last_name.split(' ').map(&:capitalize).join(' ')
+      first_name_capitalized = album.author.first_name.split.map(&:capitalize).join(' ')
+      last_name_capitalized = album.author.last_name.split.map(&:capitalize).join(' ')
 
       puts "\n\t #{'ID:'.bub}  #{album.id}  #{'Title:'.bub}  #{album.label.title}    #{'Singer:'.bub}  #{first_name_capitalized} #{last_name_capitalized}   #{'Genre:'.bub}  #{album.genre.name} \n"
       puts "\t #{'Publish Date:'.bub}  #{album.publish_date}      #{'Source:'.bub}  #{album.source.name}      #{'Color:'.bub}  #{album.label.color} \n"
@@ -84,7 +84,7 @@ class GamesListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE GAMES \n\n\n".brown.bold
-    
+
     games = App.class_variable_get(:@@games)
     puts "\n\t\t #{' There are no games yet! Please add some games. '.on_red} \n\n" if games.empty?
 
@@ -93,8 +93,8 @@ class GamesListing < Listing
       archived_text = 'Yes' if game.can_be_archived?
       multiplayer_text = 'No'
       multiplayer_text = 'Yes' if game.multiplayer
-      first_name_capitalized = game.author.first_name.split(' ').map(&:capitalize).join(' ')
-      last_name_capitalized = game.author.last_name.split(' ').map(&:capitalize).join(' ')
+      first_name_capitalized = game.author.first_name.split.map(&:capitalize).join(' ')
+      last_name_capitalized = game.author.last_name.split.map(&:capitalize).join(' ')
 
       puts "\n\t #{'ID:'.bub}  #{game.id}  #{'Title:'.bub}  #{game.label.title}    #{'Editor:'.bub}  #{first_name_capitalized} #{last_name_capitalized}   #{'Genre:'.bub}  #{game.genre.name} \n"
       puts "\t #{'Publish Date:'.bub}  #{game.publish_date}      #{'Source:'.bub}  #{game.source.name}      #{'Color:'.bub}  #{game.label.color} \n"
@@ -111,15 +111,13 @@ class MoviesListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t        ALL AVAILABLE MOVIES \n\n\n".brown.bold
-    
-    print "\t #{" THIS OPTION IS NOT AVAILABLE. MIGHT BE AVAILABLE SOON. ".bold.red.on_brown}  "
+
+    print "\t #{' THIS OPTION IS NOT AVAILABLE. MIGHT BE AVAILABLE SOON. '.bold.red.on_brown}  "
 
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end
 end
-
-
 
 # LabelsListing class
 class LabelsListing < Listing
@@ -133,9 +131,9 @@ class LabelsListing < Listing
 
     all_items = all_games + all_albums + all_books
     labels = all_items
-             .map(&:label)
-             .sort_by(&:title)
-             .uniq
+      .map(&:label)
+      .sort_by(&:title)
+      .uniq
 
     if labels.empty?
       puts "\n\t\t #{' There are no labels yet! Please add some items. '.on_red} \n\n"
@@ -145,24 +143,23 @@ class LabelsListing < Listing
       already_listed = []
 
       labels.each do |label|
-        if !already_listed.include?(label.title)
+        next if already_listed.include?(label.title)
 
-          games_using_label = all_games.select { |game| game.label.title == label.title }
-          albums_using_label = all_albums.select { |album| album.label.title == label.title }
-          books_using_label = all_books.select { |book| book.label.title == label.title }
+        games_using_label = all_games.select { |game| game.label.title == label.title }
+        albums_using_label = all_albums.select { |album| album.label.title == label.title }
+        books_using_label = all_books.select { |book| book.label.title == label.title }
 
-          items_using_label = games_using_label + albums_using_label + books_using_label
+        items_using_label = games_using_label + albums_using_label + books_using_label
 
-          colors_for_label = all_items.select { |item| item.label.color == label.color }
-                                    .map(&:label)
-                                    .map(&:color)
+        colors_for_label = all_items.select { |item| item.label.color == label.color }
+          .map(&:label)
+          .map(&:color)
 
-          puts "\n\t #{'ID:'.bub}  #{label.id}               #{'Name:'.bub}  #{label.title}"
-          puts "\t #{'Total Colors For this Label:'.bub}  #{colors_for_label.length}  (#{colors_for_label.join(', ')}) \n"
-          puts "\t #{'Items With This Label:'.bub}  #{items_using_label.length} Item(s) :  [#{games_using_label.length} Game(s), #{albums_using_label.length} Album(s), #{books_using_label.length} Book(s)]\n\n"
+        puts "\n\t #{'ID:'.bub}  #{label.id}               #{'Name:'.bub}  #{label.title}"
+        puts "\t #{'Total Colors For this Label:'.bub}  #{colors_for_label.length}  (#{colors_for_label.join(', ')}) \n"
+        puts "\t #{'Items With This Label:'.bub}  #{items_using_label.length} Item(s) :  [#{games_using_label.length} Game(s), #{albums_using_label.length} Album(s), #{books_using_label.length} Book(s)]\n\n"
 
-          already_listed << label.title
-        end
+        already_listed << label.title
       end
     end
 
@@ -184,10 +181,10 @@ class GenresListing < Listing
     all_items = all_games + all_albums + all_books
 
     genres = all_items
-              .map(&:genre)
-              .sort_by(&:name)
-              .uniq
-    
+      .map(&:genre)
+      .sort_by(&:name)
+      .uniq
+
     if genres.empty?
       puts "\n\t\t #{' There are no genres yet! Please add some items. '.on_red} \n\n"
     else
@@ -196,23 +193,21 @@ class GenresListing < Listing
       already_listed = []
 
       genres.each do |genre|
+        next if already_listed.include?(genre.name)
 
-        if !already_listed.include?(genre.name)
+        games_in_genre = all_games.select { |game| game.genre.name == genre.name }
+        albums_in_genre = all_albums.select { |album| album.genre.name == genre.name }
+        books_in_genre = all_books.select { |book| book.genre.name == genre.name }
 
-          games_in_genre = all_games.select { |game| game.genre.name == genre.name }
-          albums_in_genre = all_albums.select { |album| album.genre.name == genre.name }
-          books_in_genre = all_books.select { |book| book.genre.name == genre.name }
+        items_in_genre = games_in_genre + albums_in_genre + books_in_genre
 
-          items_in_genre = games_in_genre + albums_in_genre + books_in_genre
+        puts "\n\t #{'ID:'.bub}  #{genre.id}                #{'Name:'.bub}  #{genre.name}"
+        puts "\t #{'Items In This Genre:'.bub}  #{items_in_genre.length} Item(s) :  [#{games_in_genre.length} Game(s), #{albums_in_genre.length} Album(s), #{books_in_genre.length} Book(s)]\n\n"
 
-          puts "\n\t #{'ID:'.bub}  #{genre.id}                #{'Name:'.bub}  #{genre.name}"
-          puts "\t #{'Items In This Genre:'.bub}  #{items_in_genre.length} Item(s) :  [#{games_in_genre.length} Game(s), #{albums_in_genre.length} Album(s), #{books_in_genre.length} Book(s)]\n\n"
-
-          already_listed << genre.name
-        end
+        already_listed << genre.name
       end
     end
-    
+
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end
@@ -231,10 +226,10 @@ class AuthorsListing < Listing
     all_items = all_games + all_albums + all_books
 
     authors = all_items
-              .map(&:author)
-              .sort_by(&:first_name)
-              .uniq
-    
+      .map(&:author)
+      .sort_by(&:first_name)
+      .uniq
+
     if authors.empty?
       puts "\n\t\t #{' There are no authors yet! Please add some items. '.on_red} \n\n"
     else
@@ -243,23 +238,27 @@ class AuthorsListing < Listing
       already_listed = []
 
       authors.each do |author|
+        next if already_listed.include?("#{author.first_name} #{author.last_name}")
 
-        if !already_listed.include?("#{author.first_name} #{author.last_name}")
-
-          games_by_author = all_games.select { |game| game.author.first_name == author.first_name && game.author.last_name == author.last_name }
-          albums_by_author = all_albums.select { |album| album.author.first_name == author.first_name && album.author.last_name == author.last_name }
-          books_by_author = all_books.select { |book| book.author.first_name == author.first_name && book.author.last_name == author.last_name }
-
-          items_by_author = games_by_author + albums_by_author + books_by_author
-
-          puts "\n\t #{'ID:'.bub}  #{author.id}                #{'Name:'.bub}  #{author.first_name} #{author.last_name}"
-          puts "\t #{'Items By This Author:'.bub}  #{items_by_author.length} Item(s) :  [#{games_by_author.length} Game(s), #{albums_by_author.length} Album(s), #{books_by_author.length} Book(s)]\n\n"
-
-          already_listed << "#{author.first_name} #{author.last_name}"
+        games_by_author = all_games.select do |game|
+          game.author.first_name == author.first_name && game.author.last_name == author.last_name
         end
+        albums_by_author = all_albums.select do |album|
+          album.author.first_name == author.first_name && album.author.last_name == author.last_name
+        end
+        books_by_author = all_books.select do |book|
+          book.author.first_name == author.first_name && book.author.last_name == author.last_name
+        end
+
+        items_by_author = games_by_author + albums_by_author + books_by_author
+
+        puts "\n\t #{'ID:'.bub}  #{author.id}                #{'Name:'.bub}  #{author.first_name} #{author.last_name}"
+        puts "\t #{'Items By This Author:'.bub}  #{items_by_author.length} Item(s) :  [#{games_by_author.length} Game(s), #{albums_by_author.length} Album(s), #{books_by_author.length} Book(s)]\n\n"
+
+        already_listed << "#{author.first_name} #{author.last_name}"
       end
     end
-    
+
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end
@@ -270,7 +269,7 @@ class SourcesListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE SOURCES \n\n\n".brown.bold
-    
+
     all_games = App.class_variable_get(:@@games)
     all_albums = App.class_variable_get(:@@albums)
     all_books = App.class_variable_get(:@@books)
@@ -278,32 +277,30 @@ class SourcesListing < Listing
     all_items = all_games + all_albums + all_books
 
     sources = all_items
-              .map(&:source)
-              .sort_by(&:name)
-              .uniq
-    
+      .map(&:source)
+      .sort_by(&:name)
+      .uniq
+
     if sources.empty?
       puts "\n\t\t #{' No source could be found! Please add some items. '.on_red} \n\n"
     else
       puts "\n\t Here are the #{sources.length} source(s) found in alphabetical order \n\n"
-      
+
       already_listed = []
 
       sources.each do |source|
+        next if already_listed.include?(source.name)
 
-        if(!already_listed.include?(source.name))
-        
-          games_from_source = all_games.select { |game| game.source.name == source.name }
-          albums_from_source = all_albums.select { |album| album.source.name == source.name }
-          books_from_source = all_books.select { |book| book.source.name == source.name }
+        games_from_source = all_games.select { |game| game.source.name == source.name }
+        albums_from_source = all_albums.select { |album| album.source.name == source.name }
+        books_from_source = all_books.select { |book| book.source.name == source.name }
 
-          items_from_source = games_from_source + albums_from_source + books_from_source
+        items_from_source = games_from_source + albums_from_source + books_from_source
 
-          puts "\n\t #{'ID:'.bub}  #{source.id}                #{'Name:'.bub}  #{source.name}"
-          puts "\t #{'Items From This Source:'.bub}  #{items_from_source.length} Item(s) :  [#{games_from_source.length} Game(s), #{albums_from_source.length} Album(s), #{books_from_source.length} Book(s)]\n\n"
+        puts "\n\t #{'ID:'.bub}  #{source.id}                #{'Name:'.bub}  #{source.name}"
+        puts "\t #{'Items From This Source:'.bub}  #{items_from_source.length} Item(s) :  [#{games_from_source.length} Game(s), #{albums_from_source.length} Album(s), #{books_from_source.length} Book(s)]\n\n"
 
-          already_listed << source.name
-        end
+        already_listed << source.name
       end
     end
 
@@ -311,4 +308,5 @@ class SourcesListing < Listing
     gets.chomp
   end
 end
+# rubocop: enable Layout/LineLength
 # rubocop: enable Metrics

@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# rubocop: disable Style/ClassVars
 # Label class
 class Label
   attr_accessor :title, :color
@@ -18,3 +17,4 @@ class Label
     @@items << item unless @@items.include?(item)
   end
 end
+# rubocop: enable Style/ClassVars

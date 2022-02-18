@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# rubocop: disable Style/ClassVars
 # Author class
 class Author
   attr_accessor :first_name, :last_name
@@ -18,3 +17,4 @@ class Author
     @@items << item unless @@items.include?(item)
   end
 end
+# rubocop: enable Style/ClassVars

@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# rubocop: disable Style/OptionalBooleanParameter
 require_relative 'item'
 
 # Game class
@@ -8,11 +7,11 @@ class Game < Item
 
   def initialize(publish_date, last_played_at, multiplayer = true, archived = false, my_id = rand(1..10_000))
     super(publish_date, archived, my_id)
-    if(last_played_at.is_a?(String))
-      @last_played_at = Date.parse(last_played_at)
-    else
-      @last_played_at = last_played_at
-    end
+    @last_played_at = if last_played_at.is_a?(String)
+                        Date.parse(last_played_at)
+                      else
+                        last_played_at
+                      end
     @multiplayer = multiplayer
   end
 
@@ -22,3 +21,4 @@ class Game < Item
     super && diff_in_years > 2
   end
 end
+# rubocop: enable Style/OptionalBooleanParameter

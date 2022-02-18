@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# rubocop: disable Style/OptionalBooleanParameter
 require_relative 'item'
 
 # MusicAlbum Class
@@ -7,7 +6,7 @@ class MusicAlbum < Item
   attr_accessor :on_spotify, :name, :genre, :publish_date
   attr_reader :id
 
-  def initialize(publish_date, archived = false, on_spotify = false, id=rand(1..10_000))
+  def initialize(publish_date, archived = false, on_spotify = false, id = rand(1..10_000))
     super(publish_date, archived, id)
     @on_spotify = on_spotify
   end
@@ -16,3 +15,4 @@ class MusicAlbum < Item
     super and @on_spotify
   end
 end
+# rubocop: enable Style/OptionalBooleanParameter

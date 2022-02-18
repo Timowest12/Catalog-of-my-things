@@ -1,5 +1,5 @@
 # rubocop: disable Metrics
-# frozen_string_literal: true
+# rubocop: disable Style/ClassVars
 
 require_relative './utils/lists'
 require_relative './utils/create'
@@ -103,4 +103,5 @@ def main
 end
 
 main
+# rubocop: enable Style/ClassVars
 # rubocop: enable Metrics

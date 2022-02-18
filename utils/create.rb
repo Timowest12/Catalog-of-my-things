@@ -1,6 +1,4 @@
 # rubocop: disable Metrics
-# frozen_string_literal: true
-
 require_relative '../classes/musicalbum'
 require_relative '../classes/genre'
 require_relative '../classes/label'
@@ -38,23 +36,23 @@ class BookCreator
     puts `clear`
     puts "\n\n\n\t\t  BOOK CREATION \n\n".brown.bold
     print "\t\t #{" Book's Title: ".bold.red.on_brown}  "
-    title = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    title = gets.chomp.split.map(&:capitalize).join(' ')
     print "\n\t\t #{" Book's Genre: ".bold.red.on_brown}  "
-    genre = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    genre = gets.chomp.split.map(&:capitalize).join(' ')
     print "\n\t\t #{" Author's First Name: ".bold.red.on_brown}  "
-    auth_first_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    auth_first_name = gets.chomp.split.map(&:capitalize).join(' ')
     print "\t\t #{" Author's Last Name: ".bold.red.on_brown}  "
-    auth_last_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    auth_last_name = gets.chomp.split.map(&:capitalize).join(' ')
     print "\n\t\t #{" Book's Publisher: ".bold.red.on_brown}  "
-    publisher = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    publisher = gets.chomp.split.map(&:capitalize).join(' ')
     print "\n\t\t #{' Publish Date (yyyy-mm-dd): '.bold.red.on_brown}  "
     publish_date = gets.chomp
     print "\n\t\t #{" Book's Color: ".bold.red.on_brown}  "
-    b_color = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    b_color = gets.chomp.split.map(&:capitalize).join(' ')
     print "\n\t\t #{" Book's Cover State: ".bold.red.on_brown}  "
-    cover_state = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    cover_state = gets.chomp.split.map(&:capitalize).join(' ')
     print "\n\t\t #{" Book's Source: ".bold.red.on_brown}  "
-    source = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    source = gets.chomp.split.map(&:capitalize).join(' ')
     print "\n\t\t #{' Is This Book Archived? (y/n): '.bold.red.on_brown}  "
     archived = gets.chomp.downcase
     archived = archived == 'y'
@@ -88,25 +86,24 @@ class MusicAlbumCreator
     puts `clear`
     puts "\n\n\n\t\t  MUSIC ALBUM CREATION \n\n".brown.bold
     print "\t\t #{" Album's Title: ".bold.red.on_brown}  "
-    title = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    title = gets.chomp.split.map(&:capitalize).join(' ')
 
     print "\n\t\t #{" Singer's First Name: ".bold.red.on_brown}  "
-    auth_first_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    auth_first_name = gets.chomp.split.map(&:capitalize).join(' ')
     print "\t\t #{" Singer's Last Name: ".bold.red.on_brown}  "
-    auth_last_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    auth_last_name = gets.chomp.split.map(&:capitalize).join(' ')
 
-
-    print "\n\t\t #{" Publish Date (yyyy-mm-dd): ".bold.red.on_brown}  "
+    print "\n\t\t #{' Publish Date (yyyy-mm-dd): '.bold.red.on_brown}  "
     publish_date = gets.chomp
 
-    print "\n\t\t #{" Music Genre: ".bold.red.on_brown}  "
-    genre = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    print "\n\t\t #{' Music Genre: '.bold.red.on_brown}  "
+    genre = gets.chomp.split.map(&:capitalize).join(' ')
 
-    print "\n\t\t #{" Album Color: ".bold.red.on_brown}  "
-    color = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    print "\n\t\t #{' Album Color: '.bold.red.on_brown}  "
+    color = gets.chomp.split.map(&:capitalize).join(' ')
 
     print "\n\t\t #{" Album's Source: ".bold.red.on_brown}  "
-    source = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    source = gets.chomp.split.map(&:capitalize).join(' ')
 
     print "\n\t\t #{' Is This Album Archived? (y/n): '.bold.red.on_brown}  "
     archived = gets.chomp.downcase
@@ -139,40 +136,39 @@ class MusicAlbumCreator
   end
 end
 
-
 # GameCreator class
 class GameCreator
   def self.create
     puts `clear`
     puts "\n\n\n\t\t  GAME CREATION \n\n".brown.bold
 
-    print "\t\t #{" Name of the Game: ".bold.red.on_brown}  "
-    title = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    print "\t\t #{' Name of the Game: '.bold.red.on_brown}  "
+    title = gets.chomp.split.map(&:capitalize).join(' ')
 
-    print "\n\t\t #{" Game Genre: ".bold.red.on_brown}  "
-    genre = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    print "\n\t\t #{' Game Genre: '.bold.red.on_brown}  "
+    genre = gets.chomp.split.map(&:capitalize).join(' ')
 
-    print "\n\t\t #{" Cover Color: ".bold.red.on_brown}  "
-    color = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    print "\n\t\t #{' Cover Color: '.bold.red.on_brown}  "
+    color = gets.chomp.split.map(&:capitalize).join(' ')
 
     print "\n\t\t #{" Editor's First Name: ".bold.red.on_brown}  "
-    auth_first_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    auth_first_name = gets.chomp.split.map(&:capitalize).join(' ')
     print "\t\t #{" Editor's Last Name: ".bold.red.on_brown}  "
-    auth_last_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    auth_last_name = gets.chomp.split.map(&:capitalize).join(' ')
 
-    print "\n\t\t #{" Publish Date (yyyy-mm-dd): ".bold.red.on_brown}  "
+    print "\n\t\t #{' Publish Date (yyyy-mm-dd): '.bold.red.on_brown}  "
     publish_date = gets.chomp
 
-    print "\n\t\t #{" Is this game multiplayer? (y/n): ".bold.red.on_brown}  "
+    print "\n\t\t #{' Is this game multiplayer? (y/n): '.bold.red.on_brown}  "
     multiplayer = gets.chomp.downcase == 'y'
 
     print "\n\t\t #{" Game's Source: ".bold.red.on_brown}  "
-    source = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    source = gets.chomp.split.map(&:capitalize).join(' ')
 
-    print "\n\t\t #{" Last Played On (y/n): ".bold.red.on_brown}  "
+    print "\n\t\t #{' Last Played On (y/n): '.bold.red.on_brown}  "
     last_played_at = gets.chomp
 
-    print "\n\t\t #{" Is this game archived? (y/n): ".bold.red.on_brown}  "
+    print "\n\t\t #{' Is this game archived? (y/n): '.bold.red.on_brown}  "
     archived = gets.chomp.downcase == 'y'
 
     label = Label.new(title, color)
@@ -202,8 +198,8 @@ class MovieCreator
   def self.create
     puts `clear`
     puts "\n\n\n\t\t      MOVIE CREATION \n\n".brown.bold
-    
-    print "\t #{" THIS OPTION IS NOT AVAILABLE. MIGHT BE AVAILABLE SOON. ".bold.red.on_brown}  "
+
+    print "\t #{' THIS OPTION IS NOT AVAILABLE. MIGHT BE AVAILABLE SOON. '.bold.red.on_brown}  "
 
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "

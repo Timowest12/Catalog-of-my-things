@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# rubocop: disable Style/OptionalBooleanParameter
 require 'date'
 
 # Item class
@@ -43,3 +42,4 @@ class Item
     @source = source
   end
 end
+# rubocop: enable Style/OptionalBooleanParameter

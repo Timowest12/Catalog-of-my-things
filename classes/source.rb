@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
+# rubocop: disable Style/ClassVars
 # Class Source
-
 class Source
   attr_accessor :name
   attr_reader :id
@@ -18,3 +16,4 @@ class Source
     @@items << item unless @@items.include?(item)
   end
 end
+# rubocop: enable Style/ClassVars

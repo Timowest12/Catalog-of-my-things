@@ -44,6 +44,7 @@ DROP TABLE IF EXISTS musicalbum;
 CREATE TABLE IF NOT EXISTS musicalbum
 (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    on_spotify BOOLEAN DEFAULT false,
     publish_date DATE,
     archived BOOLEAN DEFAULT false,
     publisher TEXT,

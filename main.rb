@@ -41,8 +41,6 @@ class App
     save_games
     save_albums
     save_books
-    save_genres
-    save_author
     sleep(2)
   end
 

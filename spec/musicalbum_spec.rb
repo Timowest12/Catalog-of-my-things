@@ -1,9 +1,10 @@
 require_relative '../classes/musicalbum'
+require 'date'
 
 
 describe MusicAlbum do
   before :each do
-    @musictest = MusicAlbum.new(2002-01-01,true,true,true)
+    @musictest = MusicAlbum.new(Date.new(2019, 1, 1),true,true,true)
   end
 
   it 'music should be an instance of Music class' do
@@ -11,7 +12,7 @@ describe MusicAlbum do
   end
 
   it 'expect publish date to be correct' do
-    expect(@musictest.publish_date).to be(2002-01-01)
+    expect(@musictest.publish_date).to be_a(Date)
   end
   
   it 'expect on spotify to be correct' do

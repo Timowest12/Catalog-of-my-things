@@ -56,7 +56,7 @@ class BookCreator
     print "\n\t\t #{" Book's Source: ".bold.red.on_brown}  "
     source = gets.chomp.capitalize
     print "\n\t\t #{' Is This Book Archived? (y/n): '.bold.red.on_brown}  "
-    archived = gets.chomp
+    archived = gets.chomp.downcase
     archived = archived == 'y'
     puts "\n\n"
 
@@ -83,26 +83,56 @@ end
 
 # music album creator class
 class MusicAlbumCreator
-  def initialize
-    @albums = []
-  end
-
+  include DataStorage
   def self.create
     puts `clear`
-    puts "\n\n\n\t\t  MUSIC ALBUM CREATION \n\n"
-    print 'type the name of the album:'
-    name = gets.chomp
-    print 'type date in format(yyyy-mm-dd)'
+    puts "\n\n\n\t\t  MUSIC ALBUM CREATION \n\n".brown.bold
+    print "\t\t #{" Album's Title: ".bold.red.on_brown}  "
+    title = gets.chomp.capitalize
+
+    print "\n\t\t #{" Singer's First Name: ".bold.red.on_brown}  "
+    auth_first_name = gets.chomp.capitalize
+    print "\t\t #{" Singer's Last Name: ".bold.red.on_brown}  "
+    auth_last_name = gets.chomp.capitalize
+
+
+    print "\n\t\t #{" Publish Date (yyyy-mm-dd): ".bold.red.on_brown}  "
     publish_date = gets.chomp
-    print 'genre:'
-    genre = gets.chomp
-    newgenre = Genre.new(genre)
-    App.class_variable_get(:@@genres) << newgenre
-    print 'is the album on spotify?'
-    on_spotify = gets.chomp
-    newalbum = MusicAlbum.new(name, genre, publish_date, on_spotify)
-    App.class_variable_get(:@@albums) << newalbum
-    puts 'album created succesfully'
+
+    print "\n\t\t #{" Music Genre: ".bold.red.on_brown}  "
+    genre = gets.chomp.capitalize
+
+    print "\n\t\t #{" Album Color: ".bold.red.on_brown}  "
+    color = gets.chomp.capitalize
+
+    print "\n\t\t #{" Album's Source: ".bold.red.on_brown}  "
+    source = gets.chomp.capitalize
+
+    print "\n\t\t #{' Is This Album Archived? (y/n): '.bold.red.on_brown}  "
+    archived = gets.chomp.downcase
+    archived = archived == 'y'
+
+    print "\n\t\t #{' Is This Album On Spotify? (y/n): '.bold.red.on_brown}  "
+    on_spotify = gets.chomp.downcase
+    on_spotify = on_spotify == 'y'
+    puts "\n\n"
+
+    label = Label.new(title, color)
+    author = Author.new(auth_first_name, auth_last_name)
+    genre = Genre.new(genre)
+    source = Source.new(source)
+
+    album = MusicAlbum.new(Date.parse(publish_date), archived, on_spotify)
+
+    author.add_item(album) unless Author.class_variable_get(:@@items).include?(album)
+    genre.add_item(album) unless Genre.class_variable_get(:@@items).include?(album)
+    source.add_item(album) unless Source.class_variable_get(:@@items).include?(album)
+    label.add_item(album) unless Label.class_variable_get(:@@items).include?(album)
+
+    App.class_variable_get(:@@albums) << album
+
+    puts "\n\n\t\t #{' Album added successfully '.bold.on_green}"
+
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "
     gets.chomp

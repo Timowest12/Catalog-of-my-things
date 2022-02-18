@@ -9,7 +9,7 @@ require_relative '../classes/source'
 require_relative '../classes/item'
 require_relative '../classes/game'
 require_relative '../classes/genre'
-require_relative '../classes/musicAlbum'
+require_relative '../classes/musicalbum'
 require_relative '../classes/book'
 
 # module DataStorage
@@ -48,7 +48,22 @@ module DataStorage
       book.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
       book.assign_source(Source.new(hash['source']['name'], hash['source']['id']))
       book
+    when 'MusicAlbum'
+      music_album = MusicAlbum.new(Date.parse(hash['publish_date']), hash['archived'], hash['on_spotify'], hash['id'])
+      music_album.assign_label(Label.new(hash['label']['title'], hash['label']['color'], hash['label']['id']))
+      music_album.assign_author(Author.new(hash['author']['first_name'], hash['author']['last_name'], hash['author']['id']))
+      music_album.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
+      music_album.assign_source(Source.new(hash['source']['name'], hash['source']['id']))
+      music_album
     end
+  end
+
+  def save_books
+    books = App.class_variable_get(:@@books).map do |book|
+      object_to_hash(book)
+    end
+    books_filename = 'books.json'
+    save_data(books_filename, books)
   end
 
   def save_games
@@ -62,32 +77,27 @@ module DataStorage
   end
 
   def save_albums
-    data = []
-    albums = App.class_variable_get(:@@albums)
-    albums.each do |album|
-      data << ({ publish_date: album.publish_date,
-                 on_spotify: album.on_spotify, name: album.name, genre: album.genre })
-      save_data('album.json', data)
+    albums = App.class_variable_get(:@@albums).map do |album|
+      object_to_hash(album)
+    end 
+    albums_filename = 'albums.json'
+    save_data(albums_filename, albums)
+  end
+
+
+  def load_books
+    books_filename = 'books.json'
+    books = App.class_variable_get(:@@books)
+    if File.exist? books_filename
+      data = load_data(books_filename)
+      data.map do |book|
+        books << hash_to_object(book, 'Book')
+      end
+    else
+      []
     end
   end
 
-  def save_genres
-    data = []
-    genres = App.class_variable_get(:@@genres)
-    genres.each do |genre|
-      data << ({ name: genre.name })
-      save_data('genre.json', data)
-    end
-  end
-
-  def save_author
-    data = []
-    authors = App.class_variable_get(:@@authors)
-    authors.each do |author|
-      data << ({ first_name: author.first_name, last_name: author.last_name })
-      save_data('author.json', data)
-    end
-  end
 
   def load_games
     filename = 'game.json'
@@ -104,66 +114,18 @@ module DataStorage
   end
 
   def load_albums
-    filename = 'album.json'
+    albums_filename = 'albums.json'
     albums = App.class_variable_get(:@@albums)
-    if File.exist? filename
-      data = load_data(filename)
+    if File.exist? albums_filename
+      data = load_data(albums_filename)
       data.map do |album|
-        new_album = MusicAlbum.new(album['name'], album['genre'], album['publish_date'], album['on_spotify'])
-        albums << new_album
+        albums << hash_to_object(album, 'MusicAlbum')
       end
     else
       []
     end
   end
 
-  def save_books
-    books = App.class_variable_get(:@@books).map do |book|
-      object_to_hash(book)
-    end
-    books_filename = 'books.json'
-    save_data(books_filename, books)
-  end
-
-  def load_books
-    books_filename = 'books.json'
-    books = App.class_variable_get(:@@books)
-    if File.exist? books_filename
-      data = load_data(books_filename)
-      books = data.map do |book|
-        books << hash_to_object(book, 'Book')
-      end
-    else
-      []
-    end
-  end
-
-  def load_genres
-    filename = 'genre.json'
-    genres = App.class_variable_get(:@@genres)
-    if File.exist? filename
-      data = load_data(filename)
-      data.map do |genre|
-        new_genre = Genre.new(genre['name'])
-        genres << new_genre
-      end
-    else
-      []
-    end
-  end
-
-  def load_authors
-    filename = 'author.json'
-    authors = App.class_variable_get(:@@authors)
-    if File.exist? filename
-      data = load_data(filename)
-      data.map do |author|
-        new_author = Author.new(author['first_name'], author['last_name'])
-        authors << new_author
-      end
-    else
-      []
-    end
-  end
+  
 end
 # rubocop: enable Metrics

@@ -208,11 +208,35 @@ class AuthorsListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE AUTHORS \n\n\n".brown.bold
-    authors = App.class_variable_get(:@@authors)
-    authors.each do |author|
-      puts "Author id: #{author.id}, First Name: #{author.first_name},
-      Last Name: #{author.last_name}"
+
+    all_games = App.class_variable_get(:@@games)
+    all_albums = App.class_variable_get(:@@albums)
+    all_books = App.class_variable_get(:@@books)
+
+    all_items = all_games + all_albums + all_books
+
+    authors = all_items
+              .map(&:author)
+              .sort_by(&:first_name)
+              .uniq
+    
+    if authors.empty?
+      puts "\n\t\t #{' There are no authors yet! Please add some items. '.on_red} \n\n"
+    else
+      puts "\n\t Here are the #{authors.length} author(s) found in alphabetical order \n\n"
+
+      authors.each do |author|
+        games_by_author = all_games.select { |game| game.author.first_name == author.first_name && game.author.last_name == author.last_name }
+        albums_by_author = all_albums.select { |album| album.author.first_name == author.first_name && album.author.last_name == author.last_name }
+        books_by_author = all_books.select { |book| book.author.first_name == author.first_name && book.author.last_name == author.last_name }
+
+        items_by_author = games_by_author + albums_by_author + books_by_author
+
+        puts "\n\t #{'ID:'.bub}  #{author.id}         #{'Name:'.bub}  #{author.first_name} #{author.last_name}"
+        puts "\t #{'Items By This Author:'.bub}  #{items_by_author.length} Item(s) :  [#{games_by_author.length} Game(s), #{albums_by_author.length} Album(s), #{books_by_author.length} Book(s)]\n\n"
+      end
     end
+    
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end

@@ -9,9 +9,9 @@ class Listing
   def self.list(option)
     case option
     when 'Books'
-      BookListing.list
-    when 'MusicAlbum'
-      MusicAlbumListing.list
+      BooksListing.list
+    when 'MusicAlbums'
+      MusicAlbumsListing.list
     when 'Movies'
       MoviesListing.list
     when 'Games'
@@ -30,8 +30,8 @@ class Listing
   end
 end
 
-# booklisting class
-class BookListing < Listing
+# BooksListing class
+class BooksListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE BOOKS \n\n\n".brown.bold
@@ -53,8 +53,8 @@ class BookListing < Listing
   end
 end
 
-# music album listing class
-class MusicAlbumListing < Listing
+# MusicAlbumsListing class
+class MusicAlbumsListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE MUSIC ALBUMS \n\n\n".brown.bold
@@ -79,33 +79,47 @@ class MusicAlbumListing < Listing
   end
 end
 
-# movielisting class
-class MoviesListing < Listing
-  def self.list
-    puts `clear`
-    puts "\n\n\n\t\t     ALL AVAILABLE MOVIES \n\n\n".brown.bold
-    # Code goes here
-    puts "\n\n\n\t\t Press any key to go back to the main menu"
-    gets.chomp
-  end
-end
-
-# games listing class
+# Gameslisting class
 class GamesListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE GAMES \n\n\n".brown.bold
+    
     games = App.class_variable_get(:@@games)
+    puts "\n\t\t #{' There are no games yet! Please add some games. '.on_red} \n\n" if games.empty?
+
     games.each do |game|
-      puts "Multiplayer: #{game.multiplayer}, Last Played At: #{game.last_played_at},
-      Publish Date: #{game.publish_date}"
+      archived_text = 'No'
+      archived_text = 'Yes' if game.can_be_archived?
+      multiplayer_text = 'No'
+      multiplayer_text = 'Yes' if game.multiplayer
+      first_name_capitalized = game.author.first_name.split(' ').map(&:capitalize).join(' ')
+      last_name_capitalized = game.author.last_name.split(' ').map(&:capitalize).join(' ')
+
+      puts "\n\t #{'ID:'.bub}  #{game.id}  #{'Title:'.bub}  #{game.label.title}    #{'Editor:'.bub}  #{first_name_capitalized} #{last_name_capitalized}   #{'Genre:'.bub}  #{game.genre.name} \n"
+      puts "\t #{'Publish Date:'.bub}  #{game.publish_date}      #{'Source:'.bub}  #{game.source.name}      #{'Color:'.bub}  #{game.label.color} \n"
+      puts "\t #{'Multiplayer:'.bub}  #{multiplayer_text}       #{'Archived:'.bub}  #{archived_text}    #{'Last Played On:'.bub}  #{game.last_played_at}\n\n\n"
     end
+
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end
 end
 
-# genre listing class
+# MovieListing class
+class MoviesListing < Listing
+  def self.list
+    puts `clear`
+    puts "\n\n\n\t\t        ALL AVAILABLE MOVIES \n\n\n".brown.bold
+    
+    print "\t #{" THIS OPTION IS NOT AVAILABLE. MIGHT BE AVAILABLE SOON. ".bold.red.on_brown}  "
+
+    puts "\n\n\n\t\t Press any key to go back to the main menu"
+    gets.chomp
+  end
+end
+
+# GenresListing class
 class GenresListing < Listing
   def self.list
     puts `clear`
@@ -119,7 +133,7 @@ class GenresListing < Listing
   end
 end
 
-# label listing class
+# LabelsListing class
 class LabelsListing < Listing
   def self.list
     puts `clear`
@@ -162,7 +176,7 @@ class LabelsListing < Listing
   end
 end
 
-# author listing class
+# AuthorsListing class
 class AuthorsListing < Listing
   def self.list
     puts `clear`
@@ -177,7 +191,7 @@ class AuthorsListing < Listing
   end
 end
 
-# sourcelisting class
+# SourcesListing class
 class SourcesListing < Listing
   def self.list
     puts `clear`

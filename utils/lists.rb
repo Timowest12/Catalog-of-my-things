@@ -59,7 +59,7 @@ class MusicAlbumListing < Listing
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE MUSIC ALBUMS \n\n\n".brown.bold
     albums = App.class_variable_get(:@@albums)
-    puts "\n\t\t #{' There are no albums yet! Please add some music albums. '.on_red} \n\n" if books.empty?
+    puts "\n\t\t #{' There are no albums yet! Please add some music albums. '.on_red} \n\n" if albums.empty?
 
     albums.each do |album|
       archived_text = 'No'
@@ -72,6 +72,7 @@ class MusicAlbumListing < Listing
       puts "\n\t #{'ID:'.bub}  #{album.id}  #{'Title:'.bub}  #{album.label.title}    #{'Singer:'.bub}  #{first_name_capitalized} #{last_name_capitalized}   #{'Genre:'.bub}  #{album.genre.name} \n"
       puts "\t #{'Publish Date:'.bub}  #{album.publish_date}      #{'Source:'.bub}  #{album.source.name}      #{'Color:'.bub}  #{album.label.color} \n"
       puts "\t #{'Archived:'.bub}  #{archived_text}    #{'On Spotify:'.bub}  #{on_spotify_text}\n\n\n"
+    end
 
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp

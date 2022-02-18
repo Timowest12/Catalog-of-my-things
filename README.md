@@ -91,6 +91,7 @@ To get a local copy up and running follow these simple example steps.
 - GitHub: [@phelian23](https://github.com/phelian23)
 - Twitter: [@femikola23](https://twitter.com/femikola23)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/oluwafemi-awoyemi/)
+- AngelList: [oluwafemi-awoyemi](https://angel.co/u/oluwafemi-awoyemi)
 
 ## 🤝 Contributing
 

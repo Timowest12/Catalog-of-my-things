@@ -15,6 +15,14 @@ CREATE TABLE IF NOT EXISTS books
     source_id INT
 );
 
+-- Table: authors
+
+CREATE TABLE authors (
+   id INT,
+   first_name TEXT,
+   last_name TEXT,
+);
+
 -- Table: games
 
 CREATE TABLE games (
@@ -30,14 +38,6 @@ CREATE TABLE games (
    CONSTRAINT fk_label_id FOREIGN KEY (label_id) REFERENCES labels(id),
    CONSTRAINT fk_genre_id FOREIGN KEY (genre_id) REFERENCES genres(id),
    CONSTRAINT fk_source_id FOREIGN KEY (source_id) REFERENCES sources(id)
-);
-
--- Table: authors
-
-CREATE TABLE authors (
-   id INT,
-   first_name TEXT,
-   last_name TEXT,
 );
 
 -- Table: labels

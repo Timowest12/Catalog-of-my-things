@@ -14,7 +14,7 @@ describe Source do
   end
 
   it 'The add_items method should add item to @@items' do
-    item1 = Item.new(Date.today.to_s, true);
+    item1 = Item.new(Date.today.to_s, true)
     @source.add_item(item1)
     items = Source.class_variable_get(:@@items)
     expect(items).to include(item1)

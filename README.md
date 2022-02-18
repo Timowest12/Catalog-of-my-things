@@ -16,12 +16,12 @@
 
  As a user:
 
-   * I can list my items (books, music albums, movies, and games)
-   * I can add new items to my catalog (books, music albums, movies, and games)
-   * I can checks all the labels, genres, authors and sources of my items
-   * I can exit the program from the menu
-   * I can see the data I previously saved every time I run the app
-   * [BONUS] I have a nice UI with colors in the console.
+- I can list my items (books, music albums, movies, and games)
+- I can add new items to my catalog (books, music albums, movies, and games)
+- I can checks all the labels, genres, authors and sources of my items
+- I can exit the program from the menu
+- I can see the data I previously saved every time I run the app
+- **[BONUS]** I have a nice UI with colors in the console.
 
 
 ## Built With
@@ -48,27 +48,26 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-    * Ruby 2.5.1
-    * RSpec 3.5.0
+* Ruby 2.5.1
+* RSpec 3.5.0
 
 ### Setup
 
-    1. In your terminal, `cd` to the directory where you want to copy this project.
-    2. Still in your terminal, type `git clone git@github.com:Timowest12/rubycapstone.git`
-    3. Run `cd rubycapstone`
+1. In your terminal, `cd` to the directory where you want to copy this project.
+2. Still in your terminal, type `git@github.com:Timowest12/Catalog-of-my-things.git`
+3. Run `cd Catalog-of-my-things`
 
 ### Install
 
-    * After completing the setup section, type `bundle install`
+* After completing the setup section, type `bundle install`
 
 ### Usage
 
-    * When all the gems are installed, type `ruby main.rb` to run the app.
+* When all the gems are installed, type `ruby main.rb` to run the app.
 
 ### Run tests
 
-    * Type `rspec` to run the tests.
-
+* Type `rspec` to run the tests.
 
 
 ## Authors

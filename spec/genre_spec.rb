@@ -1,4 +1,6 @@
+require_relative '../classes/item'
 require_relative '../classes/genre'
+
 
 describe Genre do
   before :each do

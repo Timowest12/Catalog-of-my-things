@@ -153,7 +153,7 @@ class LabelsListing < Listing
                                     .map(&:label)
                                     .map(&:color)
 
-        puts "\n\t #{'ID:'.bub}  #{label.id}        #{'Name:'.bub}  #{label.title}"
+        puts "\n\t #{'ID:'.bub}  #{label.id}               #{'Name:'.bub}  #{label.title}"
         puts "\t #{'Total Colors For this Label:'.bub}  #{colors_for_label.length}  (#{colors_for_label.join(', ')}) \n"
         puts "\t #{'Items With This Label:'.bub}  #{items_using_label.length} Item(s) :  [#{games_using_label.length} Game(s), #{albums_using_label.length} Album(s), #{books_using_label.length} Book(s)]\n\n"
       end
@@ -193,7 +193,7 @@ class GenresListing < Listing
 
         items_in_genre = games_in_genre + albums_in_genre + books_in_genre
 
-        puts "\n\t #{'ID:'.bub}  #{genre.id}         #{'Name:'.bub}  #{genre.name}"
+        puts "\n\t #{'ID:'.bub}  #{genre.id}                #{'Name:'.bub}  #{genre.name}"
         puts "\t #{'Items In This Genre:'.bub}  #{items_in_genre.length} Item(s) :  [#{games_in_genre.length} Game(s), #{albums_in_genre.length} Album(s), #{books_in_genre.length} Book(s)]\n\n"
       end
     end
@@ -232,7 +232,7 @@ class AuthorsListing < Listing
 
         items_by_author = games_by_author + albums_by_author + books_by_author
 
-        puts "\n\t #{'ID:'.bub}  #{author.id}         #{'Name:'.bub}  #{author.first_name} #{author.last_name}"
+        puts "\n\t #{'ID:'.bub}  #{author.id}                #{'Name:'.bub}  #{author.first_name} #{author.last_name}"
         puts "\t #{'Items By This Author:'.bub}  #{items_by_author.length} Item(s) :  [#{games_by_author.length} Game(s), #{albums_by_author.length} Album(s), #{books_by_author.length} Book(s)]\n\n"
       end
     end
@@ -247,7 +247,43 @@ class SourcesListing < Listing
   def self.list
     puts `clear`
     puts "\n\n\n\t\t     ALL AVAILABLE SOURCES \n\n\n".brown.bold
-    # Code goes here
+    
+    all_games = App.class_variable_get(:@@games)
+    all_albums = App.class_variable_get(:@@albums)
+    all_books = App.class_variable_get(:@@books)
+
+    all_items = all_games + all_albums + all_books
+
+    sources = all_items
+              .map(&:source)
+              .sort_by(&:name)
+              .uniq
+    
+    if sources.empty?
+      puts "\n\t\t #{' No source could be found! Please add some items. '.on_red} \n\n"
+    else
+      puts "\n\t Here are the #{sources.length} source(s) found in alphabetical order \n\n"
+      
+      already_listed = []
+
+      sources.each do |source|
+
+        if(!already_listed.include?(source.name))
+        
+          games_from_source = all_games.select { |game| game.source.name == source.name }
+          albums_from_source = all_albums.select { |album| album.source.name == source.name }
+          books_from_source = all_books.select { |book| book.source.name == source.name }
+
+          items_from_source = games_from_source + albums_from_source + books_from_source
+
+          puts "\n\t #{'ID:'.bub}  #{source.id}                #{'Name:'.bub}  #{source.name}"
+          puts "\t #{'Items From This Source:'.bub}  #{items_from_source.length} Item(s) :  [#{games_from_source.length} Game(s), #{albums_from_source.length} Album(s), #{books_from_source.length} Book(s)]\n\n"
+
+          already_listed << source.name
+        end
+      end
+    end
+
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end

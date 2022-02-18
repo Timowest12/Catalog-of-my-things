@@ -10,7 +10,7 @@ class Listing
     case option
     when 'Books'
       BookListing.list
-    when 'MusicAlbum'
+    when 'MusicAlbums'
       MusicAlbumListing.list
     when 'Movies'
       MoviesListing.list

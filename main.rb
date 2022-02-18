@@ -51,16 +51,16 @@ class App
     puts "\n\t Please choose an option by entering a number"
     puts "\n\t\t #{' 1 '.red.on_brown} - List all books"
     puts "\n\t\t #{' 2 '.red.on_brown} - List all music albums "
-    puts "\n\t\t #{' 3 '.red.on_brown} - List all movies"
-    puts "\n\t\t #{' 4 '.red.on_brown} - List all games"
+    puts "\n\t\t #{' 3 '.red.on_brown} - List all games"
+    puts "\n\t\t #{' 4 '.red.on_brown} - List all movies"
     puts "\n\t\t #{' 5 '.red.on_brown} - List all genres"
     puts "\n\t\t #{' 6 '.red.on_brown} - List all labels"
     puts "\n\t\t #{' 7 '.red.on_brown} - List all authors"
     puts "\n\t\t #{' 8 '.red.on_brown} - List all sources"
     puts "\n\t\t #{' 9 '.red.on_brown} - Add a book"
     puts "\n\t\t #{' 10 '.red.on_brown} - Add a music album"
-    puts "\n\t\t #{' 11 '.red.on_brown} - Add a movie"
-    puts "\n\t\t #{' 12 '.red.on_brown} - Add a game"
+    puts "\n\t\t #{' 11 '.red.on_brown} - Add a game"
+    puts "\n\t\t #{' 12 '.red.on_brown} - Add a movie"
     puts "\n\t\t #{' 13 '.red.on_brown} - #{' Exit '.bold.on_red}\n\t #{'_'.brown * 53} \n\n"
     print "\t\t  "
   end
@@ -70,11 +70,11 @@ class App
     when 1
       Listing.list('Books')
     when 2
-      Listing.list('MusicAlbum')
+      Listing.list('MusicAlbums')
     when 3
-      Listing.list('Movies')
-    when 4
       Listing.list('Games')
+    when 4
+      Listing.list('Movies')
     when 5
       Listing.list('Genres')
     when 6
@@ -88,9 +88,9 @@ class App
     when 10
       Creator.create('MusicAlbum')
     when 11
-      Creator.create('Movie')
-    when 12
       Creator.create('Game')
+    when 12
+      Creator.create('Movie')
     else
       puts 'Enter a number between 1 and 13'
     end

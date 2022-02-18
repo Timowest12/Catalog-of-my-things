@@ -8,7 +8,11 @@ class Game < Item
 
   def initialize(publish_date, last_played_at, multiplayer = true, archived = false, my_id = rand(1..10_000))
     super(publish_date, archived, my_id)
-    @last_played_at = last_played_at
+    if(last_played_at.is_a?(String))
+      @last_played_at = Date.parse(last_played_at)
+    else
+      @last_played_at = last_played_at
+    end
     @multiplayer = multiplayer
   end
 

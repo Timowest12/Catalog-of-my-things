@@ -12,7 +12,7 @@ require_relative './colors_utils'
 require_relative './data_storage'
 require 'date'
 
-# creator class
+# Creator class
 class Creator
   include DataStorage
   def self.create(option)
@@ -31,7 +31,7 @@ class Creator
   end
 end
 
-# book creator class
+# BookCreator class
 class BookCreator
   include DataStorage
   def self.create
@@ -81,7 +81,7 @@ class BookCreator
   end
 end
 
-# music album creator class
+# MusicAlbumCreator class
 class MusicAlbumCreator
   include DataStorage
   def self.create
@@ -139,21 +139,8 @@ class MusicAlbumCreator
   end
 end
 
-# moviecreator class
-class MovieCreator
-  def self.create
-    puts `clear`
-    puts "\n\n\n\t\t  MOVIE CREATION \n\n".brown.bold
-    
-    print "\t #{" THIS OPTION IS NOT AVAILABLE. MIGHT BE AVAILABLE SOON. ".bold.red.on_brown}  "
 
-    puts "\n\n\n\t\t Press any key to go back to the main menu"
-    print "\t\t  "
-    gets.chomp
-  end
-end
-
-# game creator class
+# GameCreator class
 class GameCreator
   def self.create
     puts `clear`
@@ -203,6 +190,20 @@ class GameCreator
     App.class_variable_get(:@@games) << game
 
     puts "\n\n\t\t #{' Game added successfully! '.bold.on_green}"
+
+    puts "\n\n\n\t\t Press any key to go back to the main menu"
+    print "\t\t  "
+    gets.chomp
+  end
+end
+
+# MovieCreator class
+class MovieCreator
+  def self.create
+    puts `clear`
+    puts "\n\n\n\t\t      MOVIE CREATION \n\n".brown.bold
+    
+    print "\t #{" THIS OPTION IS NOT AVAILABLE. MIGHT BE AVAILABLE SOON. ".bold.red.on_brown}  "
 
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "

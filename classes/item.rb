@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'date'
+
 # Item class
 class Item
   attr_accessor :publish_date, :archived

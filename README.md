@@ -37,7 +37,7 @@
 
 
 
-## Demo Video (if available)
+## Demo Video
 
 [Demo Video Link](link_goes_here)
 

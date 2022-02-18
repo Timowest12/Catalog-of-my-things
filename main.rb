@@ -9,10 +9,8 @@ require_relative './utils/data_storage'
 class App
   include DataStorage
   @@albums = []
-  @@genres = []
   @@games = []
   @@books = []
-  @@authors = []
 
   def initialize
     @games = load_games

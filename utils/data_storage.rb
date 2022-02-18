@@ -48,72 +48,21 @@ module DataStorage
       book.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
       book.assign_source(Source.new(hash['source']['name'], hash['source']['id']))
       book
-    end
-  end
+    when 'MusicAlbum'
+      music_album = MusicAlbum.new(Date.parse(hash['publish_date']), hash['archived'], hash['on_spotify'], hash['id'])
+      music_album.assign_label(Label.new(hash['label']['title'], hash['label']['color'], hash['label']['id']))
+      music_album.assign_author(Author.new(hash['author']['first_name'], hash['author']['last_name'], hash['author']['id']))
+      music_album.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
+      music_album.assign_source(Source.new(hash['source']['name'], hash['source']['id']))
+      music_album
 
-  def save_games
-    data = []
-    games = App.class_variable_get(:@@games)
-    games.each do |game|
-      data << ({ multiplayer: game.multiplayer, last_played_at: game.last_played_at,
-                 publish_date: game.publish_date })
-      save_data('game.json', data)
-    end
-  end
-
-  def save_albums
-    data = []
-    albums = App.class_variable_get(:@@albums)
-    albums.each do |album|
-      data << ({ publish_date: album.publish_date,
-                 on_spotify: album.on_spotify, name: album.name, genre: album.genre })
-      save_data('album.json', data)
-    end
-  end
-
-  def save_genres
-    data = []
-    genres = App.class_variable_get(:@@genres)
-    genres.each do |genre|
-      data << ({ name: genre.name })
-      save_data('genre.json', data)
-    end
-  end
-
-  def save_author
-    data = []
-    authors = App.class_variable_get(:@@authors)
-    authors.each do |author|
-      data << ({ first_name: author.first_name, last_name: author.last_name })
-      save_data('author.json', data)
-    end
-  end
-
-  def load_games
-    filename = 'game.json'
-    games = App.class_variable_get(:@@games)
-    if File.exist? filename
-      data = load_data(filename)
-      data.map do |game|
-        new_game = Game.new(game['multiplayer'], game['last_played_at'], game['publish_date'])
-        games << new_game
-      end
-    else
-      []
-    end
-  end
-
-  def load_albums
-    filename = 'album.json'
-    albums = App.class_variable_get(:@@albums)
-    if File.exist? filename
-      data = load_data(filename)
-      data.map do |album|
-        new_album = MusicAlbum.new(album['name'], album['genre'], album['publish_date'], album['on_spotify'])
-        albums << new_album
-      end
-    else
-      []
+    when 'Game'
+      game = Game.new(Date.parse(hash['publish_date']), hash['last_played_at'], hash['multiplayer'], hash['archived'], hash['id'])
+      game.assign_label(Label.new(hash['label']['title'], hash['label']['color'], hash['label']['id']))
+      game.assign_author(Author.new(hash['author']['first_name'], hash['author']['last_name'], hash['author']['id']))
+      game.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
+      game.assign_source(Source.new(hash['source']['name'], hash['source']['id']))
+      game
     end
   end
 
@@ -125,12 +74,29 @@ module DataStorage
     save_data(books_filename, books)
   end
 
+  def save_albums
+    albums = App.class_variable_get(:@@albums).map do |album|
+      object_to_hash(album)
+    end 
+    albums_filename = 'albums.json'
+    save_data(albums_filename, albums)
+  end
+
+  def save_games
+    games = App.class_variable_get(:@@games).map do |game|
+      object_to_hash(game)
+    end
+    games_filename = 'games.json'
+    save_data(games_filename, games)
+  end
+
+
   def load_books
     books_filename = 'books.json'
     books = App.class_variable_get(:@@books)
     if File.exist? books_filename
       data = load_data(books_filename)
-      books = data.map do |book|
+      data.map do |book|
         books << hash_to_object(book, 'Book')
       end
     else
@@ -138,32 +104,32 @@ module DataStorage
     end
   end
 
-  def load_genres
-    filename = 'genre.json'
-    genres = App.class_variable_get(:@@genres)
-    if File.exist? filename
-      data = load_data(filename)
-      data.map do |genre|
-        new_genre = Genre.new(genre['name'])
-        genres << new_genre
+  def load_albums
+    albums_filename = 'albums.json'
+    albums = App.class_variable_get(:@@albums)
+    if File.exist? albums_filename
+      data = load_data(albums_filename)
+      data.map do |album|
+        albums << hash_to_object(album, 'MusicAlbum')
       end
     else
       []
     end
   end
 
-  def load_authors
-    filename = 'author.json'
-    authors = App.class_variable_get(:@@authors)
-    if File.exist? filename
-      data = load_data(filename)
-      data.map do |author|
-        new_author = Author.new(author['first_name'], author['last_name'])
-        authors << new_author
-      end
+  def load_games
+    games_filename = 'games.json'
+    games = App.class_variable_get(:@@games)
+    if File.exist? games_filename
+      data = load_data(games_filename)
+      data.map do |game|
+        games << hash_to_object(game, 'Game')
+      end 
     else
       []
-    end
+    end 
   end
+
+  
 end
 # rubocop: enable Metrics

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'date'
+
 # Item class
 class Item
   attr_accessor :publish_date, :archived
@@ -17,8 +19,8 @@ class Item
 
   def can_be_archived?
     nb_secs_in_year = 365.25 * 24 * 60 * 60
-    diff_in_years = ((Date.today.to_time - @publish_date.to_time) / nb_secs_in_year).floor
-    diff_in_years >= 10
+    diff_in_years = (Date.today.to_time - @publish_date.to_time) / nb_secs_in_year
+    diff_in_years > 10
   end
 
   def move_to_archive

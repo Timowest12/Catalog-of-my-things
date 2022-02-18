@@ -12,7 +12,7 @@ require_relative './colors_utils'
 require_relative './data_storage'
 require 'date'
 
-# creator class
+# Creator class
 class Creator
   include DataStorage
   def self.create(option)
@@ -31,32 +31,32 @@ class Creator
   end
 end
 
-# book creator class
+# BookCreator class
 class BookCreator
   include DataStorage
   def self.create
     puts `clear`
     puts "\n\n\n\t\t  BOOK CREATION \n\n".brown.bold
     print "\t\t #{" Book's Title: ".bold.red.on_brown}  "
-    title = gets.chomp.capitalize
+    title = gets.chomp.split(' ').map(&:capitalize).join(' ')
     print "\n\t\t #{" Book's Genre: ".bold.red.on_brown}  "
-    genre = gets.chomp.capitalize
+    genre = gets.chomp.split(' ').map(&:capitalize).join(' ')
     print "\n\t\t #{" Author's First Name: ".bold.red.on_brown}  "
-    auth_first_name = gets.chomp.capitalize
+    auth_first_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
     print "\t\t #{" Author's Last Name: ".bold.red.on_brown}  "
-    auth_last_name = gets.chomp.capitalize
+    auth_last_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
     print "\n\t\t #{" Book's Publisher: ".bold.red.on_brown}  "
-    publisher = gets.chomp.capitalize
+    publisher = gets.chomp.split(' ').map(&:capitalize).join(' ')
     print "\n\t\t #{' Publish Date (yyyy-mm-dd): '.bold.red.on_brown}  "
     publish_date = gets.chomp
     print "\n\t\t #{" Book's Color: ".bold.red.on_brown}  "
-    b_color = gets.chomp.capitalize
+    b_color = gets.chomp.split(' ').map(&:capitalize).join(' ')
     print "\n\t\t #{" Book's Cover State: ".bold.red.on_brown}  "
-    cover_state = gets.chomp.capitalize
+    cover_state = gets.chomp.split(' ').map(&:capitalize).join(' ')
     print "\n\t\t #{" Book's Source: ".bold.red.on_brown}  "
-    source = gets.chomp.capitalize
+    source = gets.chomp.split(' ').map(&:capitalize).join(' ')
     print "\n\t\t #{' Is This Book Archived? (y/n): '.bold.red.on_brown}  "
-    archived = gets.chomp
+    archived = gets.chomp.downcase
     archived = archived == 'y'
     puts "\n\n"
 
@@ -73,7 +73,7 @@ class BookCreator
 
     App.class_variable_get(:@@books) << book
 
-    puts "\n\n\t\t #{' Book added successfully '.bold.on_green}"
+    puts "\n\n\t\t #{' Book added successfully! '.bold.on_green}"
 
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "
@@ -81,64 +81,130 @@ class BookCreator
   end
 end
 
-# music album creator class
+# MusicAlbumCreator class
 class MusicAlbumCreator
-  def initialize
-    @albums = []
-  end
-
+  include DataStorage
   def self.create
     puts `clear`
-    puts "\n\n\n\t\t  MUSIC ALBUM CREATION \n\n"
-    print 'type the name of the album:'
-    name = gets.chomp
-    print 'type date in format(yyyy-mm-dd)'
+    puts "\n\n\n\t\t  MUSIC ALBUM CREATION \n\n".brown.bold
+    print "\t\t #{" Album's Title: ".bold.red.on_brown}  "
+    title = gets.chomp.split(' ').map(&:capitalize).join(' ')
+
+    print "\n\t\t #{" Singer's First Name: ".bold.red.on_brown}  "
+    auth_first_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    print "\t\t #{" Singer's Last Name: ".bold.red.on_brown}  "
+    auth_last_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
+
+
+    print "\n\t\t #{" Publish Date (yyyy-mm-dd): ".bold.red.on_brown}  "
     publish_date = gets.chomp
-    print 'genre:'
-    genre = gets.chomp
-    newgenre = Genre.new(genre)
-    App.class_variable_get(:@@genres) << newgenre
-    print 'is the album on spotify?'
-    on_spotify = gets.chomp
-    newalbum = MusicAlbum.new(name, genre, publish_date, on_spotify)
-    App.class_variable_get(:@@albums) << newalbum
-    puts 'album created succesfully'
+
+    print "\n\t\t #{" Music Genre: ".bold.red.on_brown}  "
+    genre = gets.chomp.split(' ').map(&:capitalize).join(' ')
+
+    print "\n\t\t #{" Album Color: ".bold.red.on_brown}  "
+    color = gets.chomp.split(' ').map(&:capitalize).join(' ')
+
+    print "\n\t\t #{" Album's Source: ".bold.red.on_brown}  "
+    source = gets.chomp.split(' ').map(&:capitalize).join(' ')
+
+    print "\n\t\t #{' Is This Album Archived? (y/n): '.bold.red.on_brown}  "
+    archived = gets.chomp.downcase
+    archived = archived == 'y'
+
+    print "\n\t\t #{' Is This Album On Spotify? (y/n): '.bold.red.on_brown}  "
+    on_spotify = gets.chomp.downcase
+    on_spotify = on_spotify == 'y'
+    puts "\n\n"
+
+    label = Label.new(title, color)
+    author = Author.new(auth_first_name, auth_last_name)
+    genre = Genre.new(genre)
+    source = Source.new(source)
+
+    album = MusicAlbum.new(Date.parse(publish_date), archived, on_spotify)
+
+    author.add_item(album) unless Author.class_variable_get(:@@items).include?(album)
+    genre.add_item(album) unless Genre.class_variable_get(:@@items).include?(album)
+    source.add_item(album) unless Source.class_variable_get(:@@items).include?(album)
+    label.add_item(album) unless Label.class_variable_get(:@@items).include?(album)
+
+    App.class_variable_get(:@@albums) << album
+
+    puts "\n\n\t\t #{' Album added successfully! '.bold.on_green}"
+
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "
     gets.chomp
   end
 end
 
-# moviecreator class
-class MovieCreator
-  def self.create
-    puts `clear`
-    puts "\n\n\n\t\t  MOVIE CREATION \n\n"
-    # Code goes here
-    puts "\n\n\n\t\t Press any key to go back to the main menu"
-    print "\t\t  "
-    gets.chomp
-  end
-end
 
-# game creator class
+# GameCreator class
 class GameCreator
   def self.create
     puts `clear`
-    puts "\n\n\n\t\t  GAME CREATION \n\n"
+    puts "\n\n\n\t\t  GAME CREATION \n\n".brown.bold
 
-    print 'Do you want multiplayer? [Y/N]: '
-    multiplayer = gets.chomp.downcase == 'y' || false
+    print "\t\t #{" Name of the Game: ".bold.red.on_brown}  "
+    title = gets.chomp.split(' ').map(&:capitalize).join(' ')
 
-    print 'Date of publish [Enter date in format (yyyy-mm-dd)]: '
+    print "\n\t\t #{" Game Genre: ".bold.red.on_brown}  "
+    genre = gets.chomp.split(' ').map(&:capitalize).join(' ')
+
+    print "\n\t\t #{" Cover Color: ".bold.red.on_brown}  "
+    color = gets.chomp.split(' ').map(&:capitalize).join(' ')
+
+    print "\n\t\t #{" Editor's First Name: ".bold.red.on_brown}  "
+    auth_first_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
+    print "\t\t #{" Editor's Last Name: ".bold.red.on_brown}  "
+    auth_last_name = gets.chomp.split(' ').map(&:capitalize).join(' ')
+
+    print "\n\t\t #{" Publish Date (yyyy-mm-dd): ".bold.red.on_brown}  "
     publish_date = gets.chomp
 
-    print 'Last played at date [Enter date in format (yyyy-mm-dd)]: '
+    print "\n\t\t #{" Is this game multiplayer? (y/n): ".bold.red.on_brown}  "
+    multiplayer = gets.chomp.downcase == 'y'
+
+    print "\n\t\t #{" Game's Source: ".bold.red.on_brown}  "
+    source = gets.chomp.split(' ').map(&:capitalize).join(' ')
+
+    print "\n\t\t #{" Last Played On (y/n): ".bold.red.on_brown}  "
     last_played_at = gets.chomp
 
-    game = Game.new(multiplayer, last_played_at, publish_date)
+    print "\n\t\t #{" Is this game archived? (y/n): ".bold.red.on_brown}  "
+    archived = gets.chomp.downcase == 'y'
+
+    label = Label.new(title, color)
+    author = Author.new(auth_first_name, auth_last_name)
+    genre = Genre.new(genre)
+    source = Source.new(source)
+
+    game = Game.new(Date.parse(publish_date), Date.parse(last_played_at), multiplayer, archived)
+
+    author.add_item(game) unless Author.class_variable_get(:@@items).include?(game)
+    genre.add_item(game) unless Genre.class_variable_get(:@@items).include?(game)
+    source.add_item(game) unless Source.class_variable_get(:@@items).include?(game)
+    label.add_item(game) unless Label.class_variable_get(:@@items).include?(game)
+
     App.class_variable_get(:@@games) << game
-    puts 'Game created successfully'
+
+    puts "\n\n\t\t #{' Game added successfully! '.bold.on_green}"
+
+    puts "\n\n\n\t\t Press any key to go back to the main menu"
+    print "\t\t  "
+    gets.chomp
+  end
+end
+
+# MovieCreator class
+class MovieCreator
+  def self.create
+    puts `clear`
+    puts "\n\n\n\t\t      MOVIE CREATION \n\n".brown.bold
+    
+    print "\t #{" THIS OPTION IS NOT AVAILABLE. MIGHT BE AVAILABLE SOON. ".bold.red.on_brown}  "
+
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     print "\t\t  "
     gets.chomp

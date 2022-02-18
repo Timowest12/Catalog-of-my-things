@@ -119,19 +119,7 @@ class MoviesListing < Listing
   end
 end
 
-# GenresListing class
-class GenresListing < Listing
-  def self.list
-    puts `clear`
-    puts "\n\n\n\t\t     ALL AVAILABLE GENRES \n\n\n".brown.bold
-    genres = App.class_variable_get(:@@genres)
-    genres.each do |genre|
-      puts "Genre: #{genre.name}"
-    end
-    puts "\n\n\n\t\t Press any key to go back to the main menu"
-    gets.chomp
-  end
-end
+
 
 # LabelsListing class
 class LabelsListing < Listing
@@ -171,6 +159,45 @@ class LabelsListing < Listing
       end
     end
 
+    puts "\n\n\n\t\t Press any key to go back to the main menu"
+    gets.chomp
+  end
+end
+
+# GenresListing class
+class GenresListing < Listing
+  def self.list
+    puts `clear`
+    puts "\n\n\n\t\t     ALL AVAILABLE GENRES \n\n\n".brown.bold
+
+    all_games = App.class_variable_get(:@@games)
+    all_albums = App.class_variable_get(:@@albums)
+    all_books = App.class_variable_get(:@@books)
+
+    all_items = all_games + all_albums + all_books
+
+    genres = all_items
+              .map(&:genre)
+              .sort_by(&:name)
+              .uniq
+    
+    if genres.empty?
+      puts "\n\t\t #{' There are no genres yet! Please add some items. '.on_red} \n\n"
+    else
+      puts "\n\t Here are the #{genres.length} genre(s) found in alphabetical order \n\n"
+
+      genres.each do |genre|
+        games_in_genre = all_games.select { |game| game.genre.name == genre.name }
+        albums_in_genre = all_albums.select { |album| album.genre.name == genre.name }
+        books_in_genre = all_books.select { |book| book.genre.name == genre.name }
+
+        items_in_genre = games_in_genre + albums_in_genre + books_in_genre
+
+        puts "\n\t #{'ID:'.bub}  #{genre.id}         #{'Name:'.bub}  #{genre.name}"
+        puts "\t #{'Items In This Genre:'.bub}  #{items_in_genre.length} Item(s) :  [#{games_in_genre.length} Game(s), #{albums_in_genre.length} Album(s), #{books_in_genre.length} Book(s)]\n\n"
+      end
+    end
+    
     puts "\n\n\n\t\t Press any key to go back to the main menu"
     gets.chomp
   end

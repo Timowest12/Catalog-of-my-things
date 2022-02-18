@@ -4,7 +4,7 @@ require 'date'
 
 describe MusicAlbum do
   before :each do
-    @musictest = MusicAlbum.new(Date.new(2019, 1, 1),true,true,true)
+    @musictest = MusicAlbum.new(Date.new(2019, 1, 1),true,true)
   end
 
   it 'music should be an instance of Music class' do

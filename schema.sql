@@ -15,6 +15,31 @@ CREATE TABLE IF NOT EXISTS books
     source_id INT
 );
 
+-- Table: games
+
+CREATE TABLE games (
+   id INT,
+   multiplayer BOOLEAN DEFAULT false,
+   last_played_at DATE,
+   publish_date DATE,
+   author_id INT,
+   label_id INT,
+   genre_id INT,
+   source_id INT,
+   CONSTRAINT fk_author_id FOREIGN KEY (author_id) REFERENCES authors(id),
+   CONSTRAINT fk_label_id FOREIGN KEY (label_id) REFERENCES labels(id),
+   CONSTRAINT fk_genre_id FOREIGN KEY (genre_id) REFERENCES genres(id),
+   CONSTRAINT fk_source_id FOREIGN KEY (source_id) REFERENCES sources(id)
+);
+
+-- Table: authors
+
+CREATE TABLE authors (
+   id INT,
+   first_name TEXT,
+   last_name TEXT,
+);
+
 -- Table: labels
 
 DROP TABLE IF EXISTS labels;

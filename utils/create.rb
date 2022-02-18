@@ -165,7 +165,7 @@ class GameCreator
     print "\n\t\t #{" Game's Source: ".bold.red.on_brown}  "
     source = gets.chomp.split.map(&:capitalize).join(' ')
 
-    print "\n\t\t #{' Last Played On (y/n): '.bold.red.on_brown}  "
+    print "\n\t\t #{' Last Played On (yyyy-mm-dd): '.bold.red.on_brown}  "
     last_played_at = gets.chomp
 
     print "\n\t\t #{' Is this game archived? (y/n): '.bold.red.on_brown}  "

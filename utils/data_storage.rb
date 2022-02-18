@@ -55,6 +55,14 @@ module DataStorage
       music_album.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
       music_album.assign_source(Source.new(hash['source']['name'], hash['source']['id']))
       music_album
+
+    when 'Game'
+      game = Game.new(Date.parse(hash['publish_date']), hash['last_played_at'], hash['multiplayer'], hash['archived'], hash['id'])
+      game.assign_label(Label.new(hash['label']['title'], hash['label']['color'], hash['label']['id']))
+      game.assign_author(Author.new(hash['author']['first_name'], hash['author']['last_name'], hash['author']['id']))
+      game.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
+      game.assign_source(Source.new(hash['source']['name'], hash['source']['id']))
+      game
     end
   end
 
@@ -66,22 +74,20 @@ module DataStorage
     save_data(books_filename, books)
   end
 
-  def save_games
-    data = []
-    games = App.class_variable_get(:@@games)
-    games.each do |game|
-      data << ({ multiplayer: game.multiplayer, last_played_at: game.last_played_at,
-                 publish_date: game.publish_date })
-      save_data('game.json', data)
-    end
-  end
-
   def save_albums
     albums = App.class_variable_get(:@@albums).map do |album|
       object_to_hash(album)
     end 
     albums_filename = 'albums.json'
     save_data(albums_filename, albums)
+  end
+
+  def save_games
+    games = App.class_variable_get(:@@games).map do |game|
+      object_to_hash(game)
+    end
+    games_filename = 'games.json'
+    save_data(games_filename, games)
   end
 
 
@@ -92,21 +98,6 @@ module DataStorage
       data = load_data(books_filename)
       data.map do |book|
         books << hash_to_object(book, 'Book')
-      end
-    else
-      []
-    end
-  end
-
-
-  def load_games
-    filename = 'game.json'
-    games = App.class_variable_get(:@@games)
-    if File.exist? filename
-      data = load_data(filename)
-      data.map do |game|
-        new_game = Game.new(game['multiplayer'], game['last_played_at'], game['publish_date'])
-        games << new_game
       end
     else
       []
@@ -124,6 +115,19 @@ module DataStorage
     else
       []
     end
+  end
+
+  def load_games
+    games_filename = 'games.json'
+    games = App.class_variable_get(:@@games)
+    if File.exist? games_filename
+      data = load_data(games_filename)
+      data.map do |game|
+        games << hash_to_object(game, 'Game')
+      end 
+    else
+      []
+    end 
   end
 
   

@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 require_relative 'item'
-# musicalbum
+
+# MusicAlbum Class
 class MusicAlbum < Item
   attr_accessor :on_spotify, :name, :genre, :publish_date
 
   def initialize(name, genre, publish_date, on_spotify)
+    super(publish_date)
     @name = name
     @genre = genre
-    super(publish_date)
     @on_spotify = on_spotify
   end
 

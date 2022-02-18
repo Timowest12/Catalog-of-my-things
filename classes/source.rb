@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-# Class Genre
-class Genre
+# Class Source
+
+class Source
   attr_accessor :name
+  attr_reader :id
 
   @@items = []
 
@@ -12,7 +14,7 @@ class Genre
   end
 
   def add_item(item)
-    item.assign_genre(self)
+    item.assign_source(self)
     @@items << item unless @@items.include?(item)
   end
 end

@@ -1,6 +1,4 @@
 # rubocop: disable Metrics
-# frozen_string_literal: true
-
 require 'json'
 require_relative '../classes/genre'
 require_relative '../classes/label'
@@ -50,13 +48,15 @@ module DataStorage
     when 'MusicAlbum'
       music_album = MusicAlbum.new(Date.parse(hash['publish_date']), hash['archived'], hash['on_spotify'], hash['id'])
       music_album.assign_label(Label.new(hash['label']['title'], hash['label']['color'], hash['label']['id']))
-      music_album.assign_author(Author.new(hash['author']['first_name'], hash['author']['last_name'], hash['author']['id']))
+      music_album.assign_author(Author.new(hash['author']['first_name'], hash['author']['last_name'],
+                                           hash['author']['id']))
       music_album.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
       music_album.assign_source(Source.new(hash['source']['name'], hash['source']['id']))
       music_album
 
     when 'Game'
-      game = Game.new(Date.parse(hash['publish_date']), hash['last_played_at'], hash['multiplayer'], hash['archived'], hash['id'])
+      game = Game.new(Date.parse(hash['publish_date']), hash['last_played_at'], hash['multiplayer'], hash['archived'],
+                      hash['id'])
       game.assign_label(Label.new(hash['label']['title'], hash['label']['color'], hash['label']['id']))
       game.assign_author(Author.new(hash['author']['first_name'], hash['author']['last_name'], hash['author']['id']))
       game.assign_genre(Genre.new(hash['genre']['name'], hash['genre']['id']))
@@ -76,7 +76,7 @@ module DataStorage
   def save_albums
     albums = App.class_variable_get(:@@albums).map do |album|
       object_to_hash(album)
-    end 
+    end
     albums_filename = 'albums.json'
     save_data(albums_filename, albums)
   end
@@ -88,7 +88,6 @@ module DataStorage
     games_filename = 'games.json'
     save_data(games_filename, games)
   end
-
 
   def load_books
     books_filename = 'books.json'
@@ -123,10 +122,10 @@ module DataStorage
       data = load_data(games_filename)
       data.map do |game|
         games << hash_to_object(game, 'Game')
-      end 
+      end
     else
       []
-    end 
+    end
   end
 end
 # rubocop: enable Metrics

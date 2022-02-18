@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# rubocop: disable Style/ClassVars
 # Class Genre
 class Genre
   attr_accessor :name
@@ -17,3 +16,4 @@ class Genre
     @@items << item unless @@items.include?(item)
   end
 end
+# rubocop: enable Style/ClassVars

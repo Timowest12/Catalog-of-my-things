@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# rubocop: disable Style/OptionalBooleanParameter
 require_relative 'item'
 
 # Book class that inherits from Item
@@ -17,3 +16,4 @@ class Book < Item
     super and @cover_state == 'bad'
   end
 end
+# rubocop: enable Style/OptionalBooleanParameter

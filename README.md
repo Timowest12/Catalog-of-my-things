@@ -77,6 +77,7 @@ To get a local copy up and running follow these simple example steps.
 
 - GitHub: [@Timowest12](https://github.com/Timowest12)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/timo-wester/)
+- AngelList: [timo-wester](https://angel.co/u/timo-wester)
 
 👤 **King Josaphat Chewa**
 
